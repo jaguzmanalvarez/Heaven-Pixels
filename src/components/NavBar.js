@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import NavBarAuthButton from './NavBarAuthButton.js';
 
 // Contenedor principal
 const NavContainer = styled.nav`
@@ -10,7 +11,7 @@ const NavContainer = styled.nav`
   justify-content: space-between;
 `;
 // Agrupacion de elementos
-const NavGroup = styled.div`
+export const NavGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
@@ -27,19 +28,6 @@ const NavLink = styled.a`
     text-decoration: underline;
   }
 `;
-// Nombre de Usuario
-const UserName = styled.span`
-  font-size: 14px;
-  color: #ffffff;
-  margin-right: 10px;
-`;
-
-// Avatar - Imagen
-const Avatar = styled.img`
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-`;
 
 // Para centrar INICIO y MIS JUEGOS
 const CenterGroup = styled.div`
@@ -50,7 +38,7 @@ const CenterGroup = styled.div`
   justify-content: center;
 `;
 
-const Navbar = () => {
+const Navbar = ( {isAuth, onSwitchView} ) => {
   return (
     <NavContainer>
       <NavGroup>
@@ -62,10 +50,8 @@ const Navbar = () => {
         <NavLink href="/my-games">MIS JUEGOS</NavLink>
       </CenterGroup>
 
-      <NavGroup>
-        <UserName>Usuario</UserName>
-        <Avatar src="https://pbs.twimg.com/media/GBGWryfXkAAZkyk?format=jpg&name=4096x4096" alt="Avatar" />
-      </NavGroup>
+      <NavBarAuthButton isAuth={isAuth} onSwitchView={onSwitchView} />
+      
     </NavContainer>
   );
 };
