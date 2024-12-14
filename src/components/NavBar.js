@@ -50,7 +50,7 @@ const CenterGroup = styled.div`
   justify-content: center;
 `;
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   return (
     <NavContainer>
       <NavGroup>
@@ -63,8 +63,8 @@ const Navbar = () => {
       </CenterGroup>
 
       <NavGroup>
-        <UserName>Usuario</UserName>
-        <Avatar src="https://pbs.twimg.com/media/GBGWryfXkAAZkyk?format=jpg&name=4096x4096" alt="Avatar" />
+        <UserName>{user.userName}</UserName>
+        <Avatar src={user.pic} alt={user.userName} />
       </NavGroup>
     </NavContainer>
   );
