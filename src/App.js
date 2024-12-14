@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 import NavBar from './components/NavBar';
+import CardGame from './components/CardGame';
+import styled from 'styled-components';
+
+const CardWrapper = styled.div`
+  margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
+`;
 
 function App() {
   return (
     <div className="App">
-      <NavBar/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <CardWrapper>
+        <CardGame />
+      </CardWrapper>
     </div>
   );
 }

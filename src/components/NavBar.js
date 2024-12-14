@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Contenedor principal
 const NavContainer = styled.nav`
   background-color: #5c6fff;
   padding: 10px 20px;
@@ -8,13 +9,14 @@ const NavContainer = styled.nav`
   align-items: center;
   justify-content: space-between;
 `;
-
+// Agrupacion de elementos
 const NavGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
 `;
 
+//Enlace de navegacion
 const NavLink = styled.a`
   font-size: 14px;
   font-weight: bold;
@@ -25,19 +27,21 @@ const NavLink = styled.a`
     text-decoration: underline;
   }
 `;
-
+// Nombre de Usuario
 const UserName = styled.span`
   font-size: 14px;
   color: #ffffff;
   margin-right: 10px;
 `;
 
+// Avatar - Imagen
 const Avatar = styled.img`
   width: 35px;
   height: 35px;
   border-radius: 50%;
 `;
 
+// Para centrar INICIO y MIS JUEGOS
 const CenterGroup = styled.div`
   display: flex;
   align-items: center;
