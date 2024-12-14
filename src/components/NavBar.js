@@ -38,7 +38,7 @@ const CenterGroup = styled.div`
   justify-content: center;
 `;
 
-const Navbar = ( {isAuth, onSwitchView} ) => {
+const Navbar = ( {user, isAuth, onSwitchView} ) => {
   return (
     <NavContainer>
       <NavGroup>
@@ -52,6 +52,10 @@ const Navbar = ( {isAuth, onSwitchView} ) => {
 
       <NavBarAuthButton isAuth={isAuth} onSwitchView={onSwitchView} />
       
+      <NavGroup>
+        <UserName>{user.userName}</UserName>
+        <Avatar src={user.pic} alt={user.userName} />
+      </NavGroup>
     </NavContainer>
   );
 };
