@@ -64,7 +64,7 @@ const Navbar = () => {
 
       <NavGroup>
         <UserName>Usuario</UserName>
-        <Avatar src="https://yt3.googleusercontent.com/z6xwLe695U_4NygXaQm7EaXXAStOBTBI2RYKS5gb3aS73d8JoGvs_PpdHy47vMqEw4RVTZfSSQ=s160-c-k-c0x00ffffff-no-rj" alt="Avatar" />
+        <Avatar src="https://pbs.twimg.com/media/GBGWryfXkAAZkyk?format=jpg&name=4096x4096" alt="Avatar" />
       </NavGroup>
     </NavContainer>
   );
