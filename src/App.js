@@ -5,32 +5,14 @@ import CardGame from './components/CardGame';
 import styled from 'styled-components';
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
+import ProfilePage from './components/ProfilePage';
 
 const CardWrapper = styled.div`
   margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
 `;
 
-function App2() {
-
-  const [isAuth, setIsAuth] = useState(false);
-  const [view, setView] = useState('main');
-
-  const switchView = ({selectedView}) => {setView(selectedView);}
-
-  switch(view){
-    case 'login': return(<LoginPage />);
-    case 'register': return(<RegisterPage />);
-    default: return(
-      <div className="App">
-        <NavBar isAuth={isAuth} onSwitchView={switchView} />
-        <CardWrapper>
-          <CardGame />
-        </CardWrapper>
-      </div>
-    );
-  }
-}
 const App = () => {
+  // Arreglo que contiene los juegos registrados
   const [games, setGames] = useState([
     {
       id: 1,
@@ -94,28 +76,99 @@ const App = () => {
     },
   ]);
 
+  // Arreglo que contiene los usuarios registrados
   const [users, setUsers] = useState([
     {
       id: 101,
       userName: "PanqueCupcake",
+      password: "1111",
       pic: "https://pbs.twimg.com/media/GBGWryfXkAAZkyk?format=jpg&name=4096x4096",
     },
+    {
+      id: 202,
+      userName: "Pedro",
+      password: "2222",
+      pic: "https://yt3.googleusercontent.com/z6xwLe695U_4NygXaQm7EaXXAStOBTBI2RYKS5gb3aS73d8JoGvs_PpdHy47vMqEw4RVTZfSSQ=s160-c-k-c0x00ffffff-no-rj"
+    },
+    {
+      id:303,
+      userName:"McSter",
+      password: "3333",
+      pic: ""
+    },
+    {
+      id: 404,
+      userName: "CrisCross",
+      password: "4444",
+      pic: ""
+    }
   ]);
 
-  return (
-    <div className="App">
-      {users.map((user) => (  
-      <NavBar key={users.id} user={user}/>
-      ))}
-      <CardWrapper>
-        <div className="game-list">
-        {games.map((game) => (  
-          <CardGame key={games.id} game={game}/>
-        ))}
-        </div>
-      </CardWrapper>
-    </div>
-  );
+  // useState que contiene un booleano para saber si alguien tiene sesion iniciada o no
+  // podría removerse para optimizar
+  const [isAuth, setIsAuth] = useState(false);
+
+  // useState que contiene la información del usuario que ha iniciado sesión
+  const [loggedUser, setLoggedUser] = useState({id:-1, userName:"", password:"", pic: ""});
+
+  // Manejador de vista de la aplicación
+  const [view, setView] = useState('main');
+  const switchView = (selectedView) => {setView(selectedView);}
+
+
+  // Manejador del evento de inicio de sesión realizado en ./components/auth/LoginPage.js
+  // Recibe un JSON con "userName" y "password" ingresados en un formulario
+  const handleLogin = (typedUser) => {
+    for(let i=0;i<users.length; i++){
+      if(users[i].userName === typedUser.userName){
+        if(users[i].password === typedUser.password){
+          setIsAuth(true);
+          setLoggedUser(users[i]);
+          return true;
+        }else{
+          return false;
+        }
+      }
+    }
+    return false;
+  }
+
+  // Manejador del evento de cierre de sesión que se encuentra en ./components/NavBar.js
+  const handleLogOut = () => {
+    setLoggedUser({id:-1, userName:"", password:"", pic: ""});
+    setIsAuth(false);
+  }
+
+  // Switch que maneja qué componente se mostrará en pantalla
+  // recibe como parámetro el valor "view" que contiene una cadena de caracteres con palabras clave
+  // login para LoginPage, register para RegisterPage
+  // El evento default muestra la página principal de la aplicación
+  switch(view){
+
+    case 'login': return(<LoginPage onSwitchView={switchView} handleLogin={handleLogin}/>);
+
+    case 'register': return(<RegisterPage onSwitchView={switchView} />);
+
+    case 'profile': return(
+      <div className="App">
+        <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
+        <ProfilePage />
+      </div>
+    );
+
+    default: return(
+      <div className="App">
+        <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
+        <CardWrapper>
+          <div className="game-list">
+          {games.map((game) => (  
+            <CardGame key={game.id} game={game}/>
+          ))}
+          </div>
+        </CardWrapper>
+      </div>
+    );
+  }
 }
 
 export default App;

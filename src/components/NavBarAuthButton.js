@@ -1,6 +1,19 @@
 import React from "react";
-import { NavGroup } from "./NavBar";
 import styled from 'styled-components';
+
+// Agrupacion de elementos
+export const NavGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.5s;
+
+  &:hover{
+    background-color:#627EFC;
+  }
+`;
 
 // Nombre de Usuario
 const UserName = styled.span`
@@ -16,13 +29,13 @@ const Avatar = styled.img`
   border-radius: 50%;
 `;
 
-const NavBarAuthButton = ({ isAuth, onSwitchView }) => {
+const NavBarAuthButton = ({ user, isAuth, onSwitchView, setOnDropDownMenu }) => {
     
     if(isAuth){
         return(
-            <NavGroup>
-                <UserName>Usuario</UserName>
-                <Avatar src="https://yt3.googleusercontent.com/z6xwLe695U_4NygXaQm7EaXXAStOBTBI2RYKS5gb3aS73d8JoGvs_PpdHy47vMqEw4RVTZfSSQ=s160-c-k-c0x00ffffff-no-rj" alt="Avatar" />
+            <NavGroup onClick={()=>setOnDropDownMenu((prev) => !prev)}>
+                <UserName>{user.userName}</UserName>
+                <Avatar src={user.pic} alt={user.userName} />
             </NavGroup>
         );
     }else{

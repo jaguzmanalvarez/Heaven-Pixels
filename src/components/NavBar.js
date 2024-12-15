@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import NavBarAuthButton from './NavBarAuthButton.js';
 
@@ -23,6 +23,7 @@ const NavLink = styled.a`
   font-weight: bold;
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -38,24 +39,76 @@ const CenterGroup = styled.div`
   justify-content: center;
 `;
 
-const Navbar = ( {user, isAuth, onSwitchView} ) => {
+const ListUserMenu = styled.ul`
+  flex-direction: column;
+  gap: 4;
+`;
+
+const DropDownUserMenu = styled.div`
+  flex-direction: column;
+  border-radius: 4px;
+  padding: 15px;
+  position:absolute;
+  right: 5px;
+  top: 55px;
+  border: 2px solid black;
+  background-color: white;
+
+  &:before{
+    content:'';
+    position: absolute;
+    top: -13.9px;
+    right: 18px;
+    width: 25px;
+    height: 25px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+  }
+`;
+
+const DropDownMenuItem = styled.li`
+  cursor: pointer;
+  padding: 5px;
+`;
+const DropDownMenuItemLogout = styled.li`
+  color:red;
+  cursor: pointer;
+  padding: 5px;
+
+  &:hover{
+    background-color: rgba(255,0,0,0.5);
+    border-radius: 15px;
+  }
+`;
+
+const Navbar = ( {user, isAuth, onSwitchView, onLogOut} ) => {
+
+  const [onDropdownMenu, setOnDropdownMenu] = useState(false);
+
   return (
     <NavContainer>
       <NavGroup>
-        <NavLink href="/">Heaven Pixels</NavLink>
+        <NavLink>Heaven Pixels</NavLink>
       </NavGroup>
 
       <CenterGroup>
-        <NavLink href="/">INICIO</NavLink>
-        <NavLink href="/my-games">MIS JUEGOS</NavLink>
+        <NavLink onClick={()=>{onSwitchView('main')}}>INICIO</NavLink>
+        <NavLink onClick={()=>{onSwitchView('mygames')}}>MIS JUEGOS</NavLink>
       </CenterGroup>
 
-      <NavBarAuthButton isAuth={isAuth} onSwitchView={onSwitchView} />
-      
-      <NavGroup>
-        <UserName>{user.userName}</UserName>
-        <Avatar src={user.pic} alt={user.userName} />
-      </NavGroup>
+      <NavBarAuthButton isAuth={isAuth} user={user} onSwitchView={onSwitchView} setOnDropDownMenu={setOnDropdownMenu} />
+
+      {onDropdownMenu &&(
+        <DropDownUserMenu>
+          <ListUserMenu>
+            <DropDownMenuItem onClick={()=>{onSwitchView('profile')}}>Perfil</DropDownMenuItem>
+            <DropDownMenuItemLogout onClick={onLogOut}>Cerrar sesión</DropDownMenuItemLogout>
+          </ListUserMenu>
+        </DropDownUserMenu>
+      )}
+
     </NavContainer>
   );
 };

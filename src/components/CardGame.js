@@ -11,6 +11,12 @@ const CardContainer = styled.div`
   overflow: hidden;
   background-color: #ffffff;
   margin: 30px 40px;
+  transition: box-shadow 0.25s;
+  cursor: pointer;
+
+  &:hover{
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+  }
 `;
 
 // Imagen del juego
