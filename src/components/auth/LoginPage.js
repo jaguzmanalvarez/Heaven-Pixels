@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, AuthInput, AuthInputGroup, WarningLabel, FadeIn, Divider } from "../../styles/auth/AuthStyles";
+import { Container, AuthInput, AuthInputGroup, WarningLabel, FadeIn } from "../../styles/auth/AuthStyles";
 
 const LoginPage = ({onSwitchView, handleLogin}) => {
 

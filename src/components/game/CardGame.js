@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { GameImage } from '../../styles/game/GameStyles';
 
 // Contenedor principal de la tarjeta
 const CardContainer = styled.div`
@@ -17,12 +18,6 @@ const CardContainer = styled.div`
   &:hover{
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
   }
-`;
-
-// Imagen del juego
-const GameImage = styled.img`
-  width: 180px;
-  object-fit: cover;
 `;
 
 // Contenedor de detalles (derecha)
@@ -83,9 +78,9 @@ const ReviewLink = styled.a`
 `;
 
 // Componente principal
-const CardGame = ({ game }) => {
+const CardGame = ({ game, onOpenModal }) => {
   return (
-    <CardContainer>
+    <CardContainer onClick={()=>{onOpenModal(game)}}>
       <GameImage src={game.cardImg} alt={game.title}/>
       <DetailsContainer>
         <div>
@@ -96,7 +91,7 @@ const CardGame = ({ game }) => {
         </div>
         <div>
           <Stars>★★★★★</Stars>
-          <ReviewLink href="#">Aquí reseña</ReviewLink>
+          <ReviewLink onClick={(e)=>{ e.nativeEvent.stopImmediatePropagation(); e.stopPropagation();}}>Aquí reseña</ReviewLink>
         </div>
       </DetailsContainer>
     </CardContainer>

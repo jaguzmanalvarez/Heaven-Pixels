@@ -11,7 +11,7 @@ const NavContainer = styled.nav`
   justify-content: space-between;
 `;
 // Agrupacion de elementos
-export const NavGroup = styled.div`
+const NavGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
@@ -104,6 +104,7 @@ const Navbar = ( {user, isAuth, onSwitchView, onLogOut} ) => {
         <DropDownUserMenu>
           <ListUserMenu>
             <DropDownMenuItem onClick={()=>{onSwitchView('profile')}}>Perfil</DropDownMenuItem>
+            <DropDownMenuItem onClick={()=>{onSwitchView('options')}}>Opciones</DropDownMenuItem>
             <DropDownMenuItemLogout onClick={onLogOut}>Cerrar sesión</DropDownMenuItemLogout>
           </ListUserMenu>
         </DropDownUserMenu>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import NavBar from './components/NavBar';
 import './App.css';
-import CardGame from './components/CardGame';
+import CardGame from './components/game/CardGame';
 import styled from 'styled-components';
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
 import ProfilePage from './components/ProfilePage';
+import GameModalPage from './components/game/GameModalPage';
 
 const CardWrapper = styled.div`
   margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
@@ -111,19 +112,65 @@ const App = () => {
   // useState que contiene la información del usuario que ha iniciado sesión
   const [loggedUser, setLoggedUser] = useState({id:-1, userName:"", password:"", pic: ""});
 
+  // useState que contiene la información del juego seleccionado
+  const [selectedGame, setSelectedGame] = useState(
+    {
+      id: -1,
+      title: "",
+      date: "",
+      dev: "",
+      publisher: "",
+      platforms: [],
+      desc:"",
+      descCard:"",
+      cardImg: "",
+      formImg:""
+    }
+  );
+
+
+  // Manejadores de la ventana modal
+  const [modalVisible, setModalVisible] = useState(false);
+
+  // Manejador para cerrar la ventana modal
+  const handleCloseModal = () => {
+    setModalVisible(!modalVisible);
+    setSelectedGame(
+      {
+        id: -1,
+        title: "",
+        date: "",
+        dev: "",
+        publisher: "",
+        platforms: [],
+        desc:"",
+        descCard:"",
+        cardImg: "",
+        formImg:""
+      }
+    );
+  }
+
+  // Manejador para abrir la ventana modal
+  const handleOpenModal = (game) => {
+    setSelectedGame(game);
+    setModalVisible(!modalVisible);
+  }
+
   // Manejador de vista de la aplicación
   const [view, setView] = useState('main');
   const switchView = (selectedView) => {setView(selectedView);}
 
 
+
   // Manejador del evento de inicio de sesión realizado en ./components/auth/LoginPage.js
   // Recibe un JSON con "userName" y "password" ingresados en un formulario
   const handleLogin = (typedUser) => {
-    for(let i=0;i<users.length; i++){
-      if(users[i].userName === typedUser.userName){
-        if(users[i].password === typedUser.password){
+    for(const element of users){
+      if(element.userName === typedUser.userName){
+        if(element.password === typedUser.password){
           setIsAuth(true);
-          setLoggedUser(users[i]);
+          setLoggedUser(element);
           return true;
         }else{
           return false;
@@ -158,11 +205,12 @@ const App = () => {
 
     default: return(
       <div className="App">
+        {modalVisible && ( <GameModalPage game={selectedGame} onCloseModal={handleCloseModal}/>) }
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
         <CardWrapper>
           <div className="game-list">
           {games.map((game) => (  
-            <CardGame key={game.id} game={game}/>
+            <CardGame key={game.id} game={game} onOpenModal={handleOpenModal}/>
           ))}
           </div>
         </CardWrapper>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfilePage = () => {
+const ProfilePage = ({loggedUser}) => {
     return (
         <div></div>
     );
