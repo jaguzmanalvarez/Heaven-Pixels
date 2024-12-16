@@ -5,14 +5,35 @@ import styled from 'styled-components';
 export const NavGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
-  cursor: pointer;
+  gap: 5px;
   border-radius: 5px;
   transition: background-color 0.5s;
+`;
 
-  &:hover{
-    background-color:#627EFC;
-  }
+const Boton = styled.button`
+    font-size: 12px;
+    font-weight: bold;
+    background: #5c6fff;
+    border-radius: 5px;
+    border: 2px solid #5c6fff;
+    margin: 0 0.3em;
+    padding: 0.5em 1.2em;
+    cursor: pointer;
+    color: white; 
+    transition: background 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+        background: #FFFFFF;
+        border-color: #FFFFFF;
+        color: #5c6fff;
+    }
+
+    &:active {
+        background: #C0C0C0;
+        border-color: #C0C0C0;
+        color:rgb(27, 52, 242);
+        transform: scale(0.99);
+    }
 `;
 
 // Nombre de Usuario
@@ -41,8 +62,8 @@ const NavBarAuthButton = ({ user, isAuth, onSwitchView, setOnDropDownMenu }) => 
     }else{
         return(
             <NavGroup>
-                <button onClick={()=>onSwitchView('login')}>Iniciar sesión</button>
-                <button onClick={()=>onSwitchView('register')}>Registrarse</button>
+                <Boton onClick={()=>onSwitchView('login')}>Iniciar sesión</Boton>
+                <Boton onClick={()=>onSwitchView('register')}>Registrarse</Boton>
             </NavGroup>
         );
     }

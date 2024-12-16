@@ -83,6 +83,7 @@ const DropDownMenuItemLogout = styled.li`
   }
 `;
 
+
 const Navbar = ( {user, isAuth, onSwitchView, onLogOut} ) => {
 
   const [onDropdownMenu, setOnDropdownMenu] = useState(false);

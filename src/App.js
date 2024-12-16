@@ -8,7 +8,7 @@ import RegisterPage from './components/auth/RegisterPage';
 import ProfilePage from './components/ProfilePage';
 
 const CardWrapper = styled.div`
-  margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
+  margin-top: 20px; /* Espacio entre el Navbar y la tarjeta */
 `;
 
 const App = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, AuthInput, AuthInputGroup, WarningLabel, FadeIn, Divider } from "../../styles/auth/AuthStyles";
+import { Container, AuthInput, AuthInputGroup, WarningLabel, FadeIn, SubContainer, WhiteButton, BlueButton } from "../../styles/auth/AuthStyles";
 
 const LoginPage = ({onSwitchView, handleLogin}) => {
 
@@ -65,15 +65,15 @@ const LoginPage = ({onSwitchView, handleLogin}) => {
     };
 
     return(
-        <div>
+        <div className="loginBg">
             <div>
                 <button onClick={()=>onSwitchView('main')}>Volver</button>
             </div>
             <Container>
-                <h2>Iniciar Sesión</h2>
                 {failed && (<FadeIn><WarningLabel>{failMessage}</WarningLabel></FadeIn>)}
                 <form onSubmit={handleSumbmit}>
                     <AuthInputGroup>
+                    <h2>Iniciar Sesión</h2>
                         <AuthInput 
                             value={typedUser.userName}
                             type="text" 
@@ -90,10 +90,12 @@ const LoginPage = ({onSwitchView, handleLogin}) => {
                             onChange={handleChange} 
                         ></AuthInput>
                     </AuthInputGroup>
-                    <button>Iniciar sesión</button>
+                    <BlueButton>Iniciar sesión</BlueButton>
                 </form>
-                <hr />
-                <button onClick={()=>onSwitchView('register')}>¿No tienes cuenta? Registrate gratis</button>
+                <SubContainer>
+                <h2>¿No tienes cuenta?</h2>
+                <WhiteButton onClick={()=>onSwitchView('register')}>Registrarse</WhiteButton>
+                </SubContainer>
             </Container>
         </div>
     );
