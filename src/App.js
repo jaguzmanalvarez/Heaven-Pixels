@@ -10,7 +10,7 @@ import GameModalPage from './components/game/GameModalPage';
 import NewGamePage from './components/game/NewGamePage';
 
 const CardWrapper = styled.div`
-  margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
+  margin-top: 20px; /* Espacio entre el Navbar y la tarjeta */
 `;
 
 const App = () => {

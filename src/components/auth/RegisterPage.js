@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Container, AuthInput, AuthInputGroup } from "../../styles/auth/AuthStyles";
+import { Container2, AuthInput, AuthInputGroupReg, SubContainer2, WhiteButton, BlueButton } from "../../styles/auth/AuthStyles";
+
 
 const RegisterPage = ({onSwitchView, user}) => {
 
@@ -34,10 +35,15 @@ const RegisterPage = ({onSwitchView, user}) => {
             <div>
                 <button onClick={()=>onSwitchView('main')}>Volver</button>
             </div>
-            <Container>
-                <h2>Registrarse</h2>
+            <Container2>
+                <SubContainer2>
+                    <h2>¿Ya tienes cuenta? </h2>
+                    <WhiteButton onClick={()=>onSwitchView('login')}>Inicia sesión</WhiteButton>
+                </SubContainer2>
+                
                 <form onSubmit={handleSumbmit}>
-                    <AuthInputGroup>
+                    <AuthInputGroupReg>
+                    <h2>Registrarse</h2>
                         <AuthInput 
                             value={typedUser.username}
                             type="text" 
@@ -66,12 +72,10 @@ const RegisterPage = ({onSwitchView, user}) => {
                             placeholder="Confirme la contraseña"
                             onChange={handleChange} 
                         ></AuthInput>
-                    </AuthInputGroup>
-                    <button>Registrarse</button>
+                    </AuthInputGroupReg>
+                    <BlueButton>Registrarse</BlueButton>
                 </form>
-                <hr />
-                <button onClick={()=>onSwitchView('login')}>¿Ya tienes cuenta? Inicia sesión</button>
-            </Container>
+            </Container2>
         </div>
     );
 }
