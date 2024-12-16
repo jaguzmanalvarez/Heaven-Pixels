@@ -71,21 +71,33 @@ const DropDownUserMenu = styled.div`
 const DropDownMenuItem = styled.li`
   cursor: pointer;
   padding: 5px;
+  transition: background-color 0.25s, border-radius 0.25s;
+
+  &:hover{
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 `;
 const DropDownMenuItemLogout = styled.li`
   color:red;
   cursor: pointer;
   padding: 5px;
+  transition: background-color 0.25s, border-radius 0.25s;
 
   &:hover{
-    background-color: rgba(255,0,0,0.5);
     border-radius: 15px;
+    background-color: rgba(255,0,0,0.5);
   }
 `;
 
 const Navbar = ( {user, isAuth, onSwitchView, onLogOut} ) => {
 
   const [onDropdownMenu, setOnDropdownMenu] = useState(false);
+
+  const handleClick = (page) => {
+    setOnDropdownMenu(false);
+    onSwitchView(page);
+  }
 
   return (
     <NavContainer>
@@ -103,8 +115,9 @@ const Navbar = ( {user, isAuth, onSwitchView, onLogOut} ) => {
       {onDropdownMenu &&(
         <DropDownUserMenu>
           <ListUserMenu>
-            <DropDownMenuItem onClick={()=>{onSwitchView('profile')}}>Perfil</DropDownMenuItem>
-            <DropDownMenuItem onClick={()=>{onSwitchView('options')}}>Opciones</DropDownMenuItem>
+            <DropDownMenuItem onClick={()=>{handleClick('profile')}}>Perfil</DropDownMenuItem>
+            {user.isAdmin===true && (<DropDownMenuItem onClick={()=>{handleClick('newgame')}} >Nuevo Juego</DropDownMenuItem>)}
+            <DropDownMenuItem onClick={()=>{handleClick('options')}}>Opciones</DropDownMenuItem>
             <DropDownMenuItemLogout onClick={onLogOut}>Cerrar sesión</DropDownMenuItemLogout>
           </ListUserMenu>
         </DropDownUserMenu>

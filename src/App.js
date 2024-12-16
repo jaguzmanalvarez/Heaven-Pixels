@@ -7,6 +7,7 @@ import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
 import ProfilePage from './components/ProfilePage';
 import GameModalPage from './components/game/GameModalPage';
+import NewGamePage from './components/game/NewGamePage';
 
 const CardWrapper = styled.div`
   margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
@@ -16,7 +17,7 @@ const App = () => {
   // Arreglo que contiene los juegos registrados
   const [games, setGames] = useState([
     {
-      id: 1,
+      id: 0,
       title: "Metaphor: Re Fantazio",
       date: "11/10/2024",
       dev: "Studio Zero",
@@ -28,7 +29,7 @@ const App = () => {
       formImg: "https://cdn.sega.co.uk/mhc-sega/public/content/media/images/raster/metaphor_horizontal_cover.jpg"
     },
     {
-      id: 2,
+      id: 1,
       title: "Balatro",
       date: "20/02/2024",
       dev: "LocalThunk",
@@ -40,7 +41,7 @@ const App = () => {
       formImg: "https://eloutput.com/wp-content/uploads/2024/10/balatro-juego-cartas_0000_Balatro_keyart.jpg"
     },
     {
-      id: 3,
+      id: 2,
       title: "Tekken 8",
       date: "26/01/2024",
       dev: "Bandai Namco Entertainment Inc.",
@@ -52,7 +53,7 @@ const App = () => {
       formImg: "https://www.bandainamcostudios.com/en/wp-content/uploads/sites/2/2024/03/resized_TEKKEN_8_Third_KA_FINISH_4K_%E9%96%8B%E7%99%BA%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB.png"
     },
     {
-      id: 4,
+      id: 3,
       title: "Astro bot",
       date: "06/09/2024",
       dev: "Team Asobi",
@@ -64,7 +65,7 @@ const App = () => {
       formImg: "https://impulsogeek.com/wp-content/uploads/2024/09/Astro-Bot-Announce-Screenshot-00-1024x549.jpg"
     },
     {
-      id: 5,
+      id: 4,
       title: "Dragon Ball: Sparking! Zero",
       date: "11/10/2024",
       dev: "Spike Chunsoft",
@@ -82,24 +83,28 @@ const App = () => {
     {
       id: 101,
       userName: "PanqueCupcake",
+      isAdmin: true,
       password: "1111",
       pic: "https://pbs.twimg.com/media/GBGWryfXkAAZkyk?format=jpg&name=4096x4096",
     },
     {
       id: 202,
       userName: "Pedro",
+      isAdmin: true,
       password: "2222",
       pic: "https://yt3.googleusercontent.com/z6xwLe695U_4NygXaQm7EaXXAStOBTBI2RYKS5gb3aS73d8JoGvs_PpdHy47vMqEw4RVTZfSSQ=s160-c-k-c0x00ffffff-no-rj"
     },
     {
       id:303,
       userName:"McSter",
+      isAdmin: false,
       password: "3333",
       pic: ""
     },
     {
       id: 404,
       userName: "CrisCross",
+      isAdmin: false,
       password: "4444",
       pic: ""
     }
@@ -128,6 +133,12 @@ const App = () => {
     }
   );
 
+
+  // Manejador para crear un nuevo juego
+  const handleCreateGame = (newGame) => {
+    setGames([...games, {...newGame, id: games.length +1}]);
+    return true;
+  }
 
   // Manejadores de la ventana modal
   const [modalVisible, setModalVisible] = useState(false);
@@ -200,6 +211,13 @@ const App = () => {
       <div className="App">
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
         <ProfilePage />
+      </div>
+    );
+
+    case 'newgame': return(
+      <div className="App">
+        <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
+        <NewGamePage onSwitchView={switchView} handleCreate={handleCreateGame}/>
       </div>
     );
 
