@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FadeInGame, GameFormContainer, GameInput, GameInputGroup, GameTextArea, WarningLabel } from "../../styles/game/GameStyles";
+import { CancelButton, FadeInGame, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
 
 const NewGamePage = ({onSwitchView, handleCreate}) => {
 
@@ -51,8 +51,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         if(!newGame.title){
             handleError('Llenar el campo de título');
             titleRef.current.focus();
@@ -119,8 +118,9 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
             <button onClick={()=>{onSwitchView('main')}}>Cerrar ventana</button>
             <h2>Agregar nuevo videojuego</h2>
             {failed && (<FadeInGame><WarningLabel>{failMessage}</WarningLabel></FadeInGame>)}
-            <form onSubmit={(e)=>{handleSubmit(e)}}>
+            
                 <GameInputGroup>
+                    <GameLabel>Título:</GameLabel>
                     <GameInput 
                         value={newGame.title}
                         type="text" 
@@ -129,6 +129,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         onChange={handleChange} 
                         ref={titleRef}
                     ></GameInput>
+                    <GameLabel>Fecha de lanzamiento:</GameLabel>
                     <GameInput 
                         value={newGame.date}
                         type="text" 
@@ -137,6 +138,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         onChange={handleChange} 
                         ref={dateRef}
                     ></GameInput>
+                    <GameLabel>Desarrolladora:</GameLabel>
                     <GameInput 
                         value={newGame.dev}
                         type="text" 
@@ -145,6 +147,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         onChange={handleChange} 
                         ref={devRef}
                     ></GameInput>
+                    <GameLabel>Publisher:</GameLabel>
                     <GameInput 
                         value={newGame.publisher}
                         type="text" 
@@ -153,6 +156,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         onChange={handleChange} 
                         ref={publisherRef}
                     ></GameInput>
+                    <GameLabel>Descripción:</GameLabel>
                     <GameTextArea 
                         value={newGame.desc}
                         type="text" 
@@ -161,6 +165,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         onChange={handleChange} 
                         ref={descRef}
                     ></GameTextArea>
+                    <GameLabel>URL de la imágen</GameLabel>
                     <GameInput 
                         value={newGame.formImg}
                         type="text" 
@@ -169,6 +174,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         onChange={handleChange} 
                         ref={formImgRef}
                     ></GameInput>
+                    <GameLabel>Descripción en tarjeta:</GameLabel>
                     <GameTextArea
                         value={newGame.descCard}
                         type="text" 
@@ -177,6 +183,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         onChange={handleChange} 
                         ref={descCardRef}
                     ></GameTextArea>
+                    <GameLabel>URL de la imagen en tarjeta:</GameLabel>
                     <GameInput 
                         value={newGame.cardImg}
                         type="text" 
@@ -186,9 +193,8 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         ref={cardImgRef}
                     ></GameInput>
                 </GameInputGroup>
-                <button>Guardar</button>
-            </form>
-            <button>Cancelar</button>
+                <SaveGameButton onClick={handleSubmit}>Guardar</SaveGameButton>
+            <CancelButton>Cancelar</CancelButton>
         </GameFormContainer>
     );
 }

@@ -48,7 +48,6 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
     const cardImgRef = useRef(null);
     const formImgRef = useRef(null);
 
-
     useEffect(() => {
         titleRef.current.focus()
     }, [])
@@ -72,16 +71,19 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
         if(!editedGame.title){
             handleError('Llenar el campo de título');
             titleRef.current.focus();
+            titleRef.current.scrollIntoView();
             return;
         }
         if(!editedGame.date){
             handleError('Llenar el campo de fecha de salida');
             dateRef.current.focus();
+            dateRef.current.scrollIntoView();
             return;
         }
         if(!editedGame.dev){
             handleError('Llenar el campo de desarrolladora');
             devRef.current.focus();
+            devRef.current.scrollIntoView();
             return;
         }
         if(!editedGame.publisher){
@@ -97,6 +99,7 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
         if(!editedGame.descCard){
             handleError('Llenar el campo de descripción para la tarjeta');
             descCardRef.current.focus();
+            descCardRef.current.scrollIntoView();
             return;
         }
         if(!editedGame.formImg){
