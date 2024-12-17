@@ -5,7 +5,7 @@ import CardGame from './components/game/CardGame';
 import styled from 'styled-components';
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
-import ProfilePage from './components/ProfilePage';
+import ProfilePage from './components/profile/ProfilePage';
 import GameModalPage from './components/game/GameModalPage';
 import NewGamePage from './components/game/NewGamePage';
 
@@ -99,16 +99,35 @@ const App = () => {
       userName:"McSter",
       isAdmin: false,
       password: "3333",
-      pic: ""
+      pic: "https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg"
     },
     {
       id: 404,
       userName: "CrisCross",
-      isAdmin: false,
+      email: "crmercadosa@ittepic.edu.mx",
+      isAdmin: true,
       password: "4444",
       pic: ""
     }
   ]);
+
+  // Función para agregar un nuevo usuario
+  const handleAddUser = (newUser) => {
+    setUsers([...users, newUser]);
+  };
+
+  const handleUpdateUser = (updatedUser) => {
+    // Actualizamos el estado de los usuarios con el usuario modificado
+    const updatedUsers = users.map((user) =>
+      user.id === updatedUser.id ? updatedUser : user
+    );
+    setUsers(updatedUsers);
+    setLoggedUser(updatedUser);
+  };
+
+  const handleDeleteAcoount = (userId) => {
+    setUsers(users.filter((user)=>user.id !== userId))
+  }
 
   // useState que contiene un booleano para saber si alguien tiene sesion iniciada o no
   // podría removerse para optimizar
@@ -205,12 +224,12 @@ const App = () => {
 
     case 'login': return(<LoginPage onSwitchView={switchView} handleLogin={handleLogin}/>);
 
-    case 'register': return(<RegisterPage onSwitchView={switchView} />);
+    case 'register': return(<RegisterPage onSwitchView={switchView} addUser={handleAddUser} />);
 
     case 'profile': return(
       <div className="App">
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
-        <ProfilePage />
+        <ProfilePage loggedUser={loggedUser} onUpdateUser={handleUpdateUser} onSwitchView={switchView} onLogOut={handleLogOut} onDeleteAccount={handleDeleteAcoount}/>
       </div>
     );
 
