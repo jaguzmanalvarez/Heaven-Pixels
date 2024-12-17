@@ -1,9 +1,3 @@
 .App {
   text-align: center;
 }
-
-.game-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
