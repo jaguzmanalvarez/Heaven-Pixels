@@ -40,6 +40,13 @@ box-sizing: border-box;
 }
 `;
 
+// Label
+export const GameLabel = styled.label`
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+`;
+
 // Text area
 export  const GameTextArea = styled.textarea`
 width: 100%;
@@ -71,4 +78,34 @@ const fadeIn = keyframes`
 `;
 export const FadeInGame = styled.div`
   animation: ${fadeIn} 0.4s ease-in-out;
+`;
+
+const GameButton = styled.button`
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 18px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+  }
+`;
+
+export const SaveGameButton = styled(GameButton)`
+  background-color: #2ecc71;
+  &:hover {
+    background-color: #27ae60;
+  }
+`;
+
+export const CancelButton = styled(GameButton)`
+  background-color: #bdc3c7;
+  &:hover {
+    background-color: #95a5a6;
+  }
 `;

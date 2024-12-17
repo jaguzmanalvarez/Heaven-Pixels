@@ -1,3 +1,6 @@
+
+// Componente llamado desde el archivo src/App.js
+
 import React from "react";
 import styled from "styled-components";
 import { GameImage } from "../../styles/game/GameStyles";
@@ -20,7 +23,7 @@ const Modal = styled.div`
     height: 100%;
 `;
 
-const GameModalPage = ({game, onCloseModal}) => {
+const GameModalPage = ({game, onCloseModal, isAdmin, onEditGame, onDeleteGame}) => {
 
     return (
         <ModalContainer onClick={onCloseModal}>
@@ -40,6 +43,12 @@ const GameModalPage = ({game, onCloseModal}) => {
                     <p>
                         Descripción: {game.desc}
                     </p>
+                    {isAdmin &&(
+                        <div>
+                            <button onClick={onEditGame}>Editar</button>
+                            <button onClick={onDeleteGame}>Eliminar</button>
+                        </div>
+                    )}
                 </div>
                 <hr />
                 <div>
