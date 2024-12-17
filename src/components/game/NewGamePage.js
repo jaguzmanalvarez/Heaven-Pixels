@@ -188,6 +188,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                 </GameInputGroup>
                 <button>Guardar</button>
             </form>
+            <button>Cancelar</button>
         </GameFormContainer>
     );
 }

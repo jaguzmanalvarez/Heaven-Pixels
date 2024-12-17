@@ -1,15 +1,21 @@
 import React from "react";
 import styled from 'styled-components';
 
-// Agrupacion de elementos
+// Agrupacion de elementos de usuario
 const NavGroupUser = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
   border-radius: 5px;
   transition: background-color 0.5s;
+  cursor: pointer;
+  
+  &:hover{
+    background-color:#627EFC;
+  }
 `;
 
+// Agrupación de elementos
 const NavGroup = styled.div`
   display: flex;
   align-items: center;

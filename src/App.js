@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import NavBar from './components/NavBar';
 import './App.css';
-import CardGame from './components/game/CardGame';
 import styled from 'styled-components';
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
 import ProfilePage from './components/ProfilePage';
 import GameModalPage from './components/game/GameModalPage';
 import NewGamePage from './components/game/NewGamePage';
+import GameList from './components/game/GameList';
+import EditGamePage from './components/game/EditGamePage';
+import ConfirmModal from './components/ConfirmModal';
 
 const CardWrapper = styled.div`
   margin-top: 20px; /* Espacio entre el Navbar y la tarjeta */
@@ -81,28 +83,28 @@ const App = () => {
   // Arreglo que contiene los usuarios registrados
   const [users, setUsers] = useState([
     {
-      id: 101,
+      id: 0,
       userName: "PanqueCupcake",
       isAdmin: true,
       password: "1111",
       pic: "https://pbs.twimg.com/media/GBGWryfXkAAZkyk?format=jpg&name=4096x4096",
     },
     {
-      id: 202,
+      id: 1,
       userName: "Pedro",
       isAdmin: true,
       password: "2222",
       pic: "https://yt3.googleusercontent.com/z6xwLe695U_4NygXaQm7EaXXAStOBTBI2RYKS5gb3aS73d8JoGvs_PpdHy47vMqEw4RVTZfSSQ=s160-c-k-c0x00ffffff-no-rj"
     },
     {
-      id:303,
+      id: 2,
       userName:"McSter",
       isAdmin: false,
       password: "3333",
       pic: ""
     },
     {
-      id: 404,
+      id: 3,
       userName: "CrisCross",
       isAdmin: false,
       password: "4444",
@@ -111,11 +113,11 @@ const App = () => {
   ]);
 
   // useState que contiene un booleano para saber si alguien tiene sesion iniciada o no
-  // podría removerse para optimizar
+  // ******podría modificarse para optimizar
   const [isAuth, setIsAuth] = useState(false);
 
   // useState que contiene la información del usuario que ha iniciado sesión
-  const [loggedUser, setLoggedUser] = useState({id:-1, userName:"", password:"", pic: ""});
+  const [loggedUser, setLoggedUser] = useState({id:-1, userName:"", isAdmin:false, password:"", pic: ""});
 
   // useState que contiene la información del juego seleccionado
   const [selectedGame, setSelectedGame] = useState(
@@ -140,10 +142,17 @@ const App = () => {
     return true;
   }
 
-  // Manejadores de la ventana modal
+  // Manejador para editar un juego existente  
+  const handleEditGame = (editedGame) =>{
+    setGames(games.map((game)=>(game.id === editedGame.id ? editedGame : game)));
+    setSelectedGame(editedGame);
+    return true;
+  }
+
+  // Manejadores de la ventana modal para mostrar la información del juego
   const [modalVisible, setModalVisible] = useState(false);
 
-  // Manejador para cerrar la ventana modal
+  // Manejador para cerrar la ventana modal que muestra la información del juego
   const handleCloseModal = () => {
     setModalVisible(!modalVisible);
     setSelectedGame(
@@ -162,10 +171,29 @@ const App = () => {
     );
   }
 
-  // Manejador para abrir la ventana modal
+  // Manejador para abrir la ventana modal que muestra la información del juego
   const handleOpenModal = (game) => {
     setSelectedGame(game);
     setModalVisible(!modalVisible);
+  }
+
+  // Manejador para abrir la ventana de edición de juego
+  const [showEditPage, setShowEditPage] = useState(false);
+  const handleShowEditPage = () => {
+    setModalVisible(!modalVisible);
+    if(showEditPage){
+      setShowEditPage(false);
+      setView('main');
+    }else{
+      setShowEditPage(true);
+      setView('editgame');
+    }
+  }
+
+  // Manejador para abrir la modal de eliminación de juego
+  const [showDeleteGameModal, setShowDeleteGameModal] = useState(false);
+  const handleShowDeleteGameModal = () => {
+
   }
 
   // Manejador de vista de la aplicación
@@ -221,19 +249,26 @@ const App = () => {
       </div>
     );
 
+    case 'editgame': return(
+      <div className="App">
+        <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
+        <EditGamePage game={selectedGame} onSwitchView={switchView} handleEdit={handleEditGame} onCloseEditPage={handleShowEditPage}/>
+      </div>
+    );
+
     default: return(
       <div className="App">
-        {modalVisible && ( <GameModalPage game={selectedGame} onCloseModal={handleCloseModal}/>) }
+        {showDeleteGameModal && (<ConfirmModal title={"Eliminar juego"} text={"Estás a punto de eliminar "+selectedGame.title+" desarrollado por "+selectedGame.dev+". ¿Estás seguro de realizar esta acción?"}/>)}
+        {modalVisible && ( <GameModalPage game={selectedGame} onCloseModal={handleCloseModal} isAdmin={loggedUser.isAdmin} onEditGame={handleShowEditPage} onDeleteGame={handleShowDeleteGameModal}/>) }
+
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
+        
         <CardWrapper>
-          <div className="game-list">
-          {games.map((game) => (  
-            <CardGame key={game.id} game={game} onOpenModal={handleOpenModal}/>
-          ))}
-          </div>
+          <GameList games={games} handleOpenModal={handleOpenModal}/>
         </CardWrapper>
       </div>
     );
+
   }
 }
 
