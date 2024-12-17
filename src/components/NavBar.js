@@ -107,8 +107,8 @@ const Navbar = ( {user, isAuth, onSwitchView, onLogOut} ) => {
       </NavGroup>
 
       <CenterGroup>
-        <NavLink onClick={()=>{onSwitchView('main')}}>INICIO</NavLink>
-        <NavLink onClick={()=>{onSwitchView('mygames')}}>MIS JUEGOS</NavLink>
+        <NavLink onClick={()=>{onSwitchView('main')}}>Inicio</NavLink>
+        <NavLink onClick={()=>{onSwitchView('mygames')}}>Mis Juegos</NavLink>
       </CenterGroup>
 
       <NavBarAuthButton isAuth={isAuth} user={user} onSwitchView={onSwitchView} setOnDropDownMenu={setOnDropdownMenu} />
@@ -119,7 +119,7 @@ const Navbar = ( {user, isAuth, onSwitchView, onLogOut} ) => {
             <DropDownMenuItem onClick={()=>{handleClick('profile')}}>Perfil</DropDownMenuItem>
             {user.isAdmin===true && (<DropDownMenuItem onClick={()=>{handleClick('newgame')}} >Nuevo Juego</DropDownMenuItem>)}
             <DropDownMenuItem onClick={()=>{handleClick('options')}}>Opciones</DropDownMenuItem>
-            <DropDownMenuItemLogout onClick={onLogOut}>Cerrar sesión</DropDownMenuItemLogout>
+            <DropDownMenuItemLogout onClick={() => {onLogOut(); onSwitchView('main');}}> Cerrar sesión</DropDownMenuItemLogout>
           </ListUserMenu>
         </DropDownUserMenu>
       )}
