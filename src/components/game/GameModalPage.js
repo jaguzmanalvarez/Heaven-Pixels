@@ -3,7 +3,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { GameImage } from "../../styles/game/GameStyles";
+import { DeleteGameButton, EditGameButton, GameImage } from "../../styles/game/GameStyles";
 
 const ModalContainer = styled.div`
     position: fixed;
@@ -45,8 +45,8 @@ const GameModalPage = ({game, onCloseModal, isAdmin, onEditGame, onDeleteGame}) 
                     </p>
                     {isAdmin &&(
                         <div>
-                            <button onClick={onEditGame}>Editar</button>
-                            <button onClick={onDeleteGame}>Eliminar</button>
+                            <EditGameButton onClick={onEditGame}>Editar</EditGameButton>
+                            <DeleteGameButton onClick={onDeleteGame}>Eliminar</DeleteGameButton>
                         </div>
                     )}
                 </div>

@@ -157,7 +157,7 @@ const App = () => {
 
   // Manejador para crear un nuevo juego
   const handleCreateGame = (newGame) => {
-    setGames([...games, {...newGame, id: games.length +1}]);
+    setGames([...games, {...newGame, id: games[games.length-1].id +1}]);
     return true;
   }
 
@@ -166,6 +166,15 @@ const App = () => {
     setGames(games.map((game)=>(game.id === editedGame.id ? editedGame : game)));
     setSelectedGame(editedGame);
     return true;
+  }
+
+  const handleDeleteGame = (isAccepted) => {
+    if(isAccepted){
+      setModalVisible(false);
+      setGames(games.filter((game)=>(game.id!==selectedGame.id)));
+    }else{
+      setModalVisible(true);
+    }
   }
 
   // Manejadores de la ventana modal para mostrar la información del juego
@@ -212,8 +221,14 @@ const App = () => {
   // Manejador para abrir la modal de eliminación de juego
   const [showDeleteGameModal, setShowDeleteGameModal] = useState(false);
   const handleShowDeleteGameModal = () => {
-
+    setModalVisible(false);
+    setShowDeleteGameModal(true);
   }
+  
+  const handleHideDeleteGameModal = () => {
+    setShowDeleteGameModal(false);
+  }
+
 
   // Manejador de vista de la aplicación
   const [view, setView] = useState('main');
@@ -277,7 +292,7 @@ const App = () => {
 
     default: return(
       <div className="App">
-        {showDeleteGameModal && (<ConfirmModal title={"Eliminar juego"} text={"Estás a punto de eliminar "+selectedGame.title+" desarrollado por "+selectedGame.dev+". ¿Estás seguro de realizar esta acción?"}/>)}
+        {showDeleteGameModal && (<ConfirmModal title={"Eliminar juego"} text={"Estás a punto de eliminar "+selectedGame.title+" desarrollado por "+selectedGame.dev+". ¿Estás seguro de realizar esta acción?"} onSetValue={handleDeleteGame} onCloseModal={handleHideDeleteGameModal} isDelete={true}/> )}
         {modalVisible && ( <GameModalPage game={selectedGame} onCloseModal={handleCloseModal} isAdmin={loggedUser.isAdmin} onEditGame={handleShowEditPage} onDeleteGame={handleShowDeleteGameModal}/>) }
 
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>

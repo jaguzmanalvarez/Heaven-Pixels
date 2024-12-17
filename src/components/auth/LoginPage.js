@@ -42,14 +42,6 @@ const LoginPage = ({onSwitchView, handleLogin}) => {
                     onSwitchView('main');
                 }else{
                     setFailed(true);
-                    //**
-                    // 
-                    // 
-                    // FALTA MOSTRAR GRÁFICAMENTE EL FALLO DE INICIO DE SESION, CON ANIMACIÓN O CAMBIO DE COLOR
-                    // YA QUE ACTUALMENTE SOLO MUESTRA EL TEXTO ARRIBA
-                    // 
-                    // 
-                    //  *//
                     setTypedUser({ userName: typedUser.userName, password: "" });
                     setFailMessage("Error al inciar sesión: Usuario o contraseña erroneos");
                 }
