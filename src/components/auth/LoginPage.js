@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, AuthInput, AuthInputGroup, WarningLabel, FadeIn, SubContainer, WhiteButton, BlueButton } from "../../styles/auth/AuthStyles";
+import { Container, AuthInput, AuthInputGroup, SubContainer, WhiteButton, BlueButton, BackButton, FailMessage } from "../../styles/auth/AuthStyles";
 
 const LoginPage = ({onSwitchView, handleLogin}) => {
 
     // Booleano que verifica si ha ocurrido un error
     const [failed, setFailed] = useState(false);
-    const [failMessage, setFailMessage] = useState("");
+    const [failMessage, setFailMessage] = useState('');
 
     // Otorga el focus al Input de UserName, al cargar la página y al ocurrir un error de inicio de sesión
     const inputRef = useRef(null)
@@ -41,7 +41,6 @@ const LoginPage = ({onSwitchView, handleLogin}) => {
                     setTypedUser( { userName:"", password:"" } );
                     onSwitchView('main');
                 }else{
-                    console.log("USUARIO O CONTRASEÑA INCORRECTOS");
                     setFailed(true);
                     //**
                     // 
@@ -67,10 +66,19 @@ const LoginPage = ({onSwitchView, handleLogin}) => {
     return(
         <div className="loginBg">
             <div>
-                <button onClick={()=>onSwitchView('main')}>Volver</button>
+            <BackButton onClick={() => onSwitchView("main")}>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                >
+                    <path d="M15.5 19l-7-7 7-7" />
+                </svg>
+                Regresar
+            </BackButton>
             </div>
             <Container>
-                {failed && (<FadeIn><WarningLabel>{failMessage}</WarningLabel></FadeIn>)}
+                {failed && (<FailMessage>{failMessage}</FailMessage>)}
                 <form onSubmit={handleSumbmit}>
                     <AuthInputGroup>
                     <h2>Iniciar Sesión</h2>
@@ -90,11 +98,11 @@ const LoginPage = ({onSwitchView, handleLogin}) => {
                             onChange={handleChange} 
                         ></AuthInput>
                     </AuthInputGroup>
-                    <BlueButton>Iniciar sesión</BlueButton>
+                    <BlueButton onClick={()=>setFailed(false)}>Iniciar sesión</BlueButton>
                 </form>
                 <SubContainer>
                 <h2>¿No tienes cuenta?</h2>
-                <WhiteButton onClick={()=>onSwitchView('register')}>Registrarse</WhiteButton>
+                <WhiteButton onClick={()=>onSwitchView('register')} >Registrarse</WhiteButton>
                 </SubContainer>
             </Container>
         </div>
