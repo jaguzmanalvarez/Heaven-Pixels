@@ -119,7 +119,8 @@ const App = () => {
       desc:"Ponte las botas de Helldiver, un soldado de élite cuya misión es difundir la paz, la libertad y la Democracia Tutelada usando las herramientas más enormes y explosivas de toda la galaxia. Los Helldivers no empiezan una misión sin los refuerzos adecuados, pero de ti depende cómo y cuándo pedirlos. No solo cuentas con una variedad de armas principales superpoderosas y arsenales personalizables, sino que también puedes usar estratagemas durante las partidas. ",
       descCard:"Acompaña a los Helldivers a luchar por la libertad en una galaxia hostil.",
       cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202309/0718/2c253de3117182b4a09d02ad16ebc51a25d4ea9208a5d057.jpg",
-      formImg: "https://sm.ign.com/ign_latam/news/h/helldivers/helldivers-2-developer-insists-sony-acquisition-rumor-is-fak_arqg.jpg"
+      formImg: "https://sm.ign.com/ign_latam/news/h/helldivers/helldivers-2-developer-insists-sony-acquisition-rumor-is-fak_arqg.jpg",
+      reviews: []
     },
     {
       id: 6,
@@ -131,7 +132,8 @@ const App = () => {
       desc:"Chai contra el mundo! Juega como el aspirante a estrella de rock Chai, considerado mutante después de que un músico se fusiona accidentalmente a su corazón. Aprovecha la capacidad de Chai de sentir el ritmo a su alrededor y lucha contra los jefes corporativos decididos a 'retirarlo'.",
       descCard:"Lucha contra robots enemigos con ritmos feroces en este emocionante juego de acción.",
       cardImg: "https://images.mweb.bethesda.net/_images/images.ctfassets.net/tehqz6o3okv8/2eZHOuPHrSCuP5Y4VpmcZA/247c20de2544c3cfe9e78d98c1aa2524/HFR-box-standard.webp?f=jpg&h=1000&w=779&s=jnbkJw0fra-wn-ZNG3nW3eMAnjAxyeVS7e-aQz8HrLE",
-      formImg: "https://multiplayer.net-cdn.it/thumbs/images/2024/05/08/hi-fi-rush-2_jpg_1376x774_crop_q85.jpg"
+      formImg: "https://multiplayer.net-cdn.it/thumbs/images/2024/05/08/hi-fi-rush-2_jpg_1376x774_crop_q85.jpg",
+      reviews: []
     },
     {
       id: 7,
@@ -143,7 +145,8 @@ const App = () => {
       desc:"Balancéate, salta y utiliza las nuevas alas de telaraña para recorrer toda la ciudad de Nueva York de Marvel. También podrás cambiar rápidamente entre Peter Parker y Miles Morales para vivir diferentes historias y canalizar poderes nuevos y épicos, mientras el emblemático villano Venom amenaza con destruir sus vidas, la ciudad y a todos sus seres queridos.",
       descCard:"Los Spider-Men Peter Parker y Miles Morales regresan para una nueva y emocionante aventura.",
       cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
-      formImg: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/97e9f5fa6e50c185d249956c6f198a2652a9217e69a59ecd.jpg"
+      formImg: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/97e9f5fa6e50c185d249956c6f198a2652a9217e69a59ecd.jpg",
+      reviews: []
     },
     {
       id: 8,
@@ -155,7 +158,8 @@ const App = () => {
       desc:"¡El estilo de juego clásico de los juegos de Mario será toda una locura con la adición de la Flor Maravilla en el juego Super Mario Bros. Wonder! Estos revolucionarios objetos activarán espectaculares momentos que tendrás que ver para creer. ¡Mira cómo las tuberías cobran vida, siembra el caos como una inmensa bola con picos y mucho más!",
       descCard:"El estilo de juego clásico de desplazamiento lateral de los juegos de Mario será toda una locura con la adición de la Flor Maravilla.",
       cardImg: "https://i.ebayimg.com/images/g/CxYAAOSwNwVlMlwF/s-l400.jpg",
-      formImg: "https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/dde58e70727aad7c96e348ce79b3ca2b.jpg"
+      formImg: "https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/dde58e70727aad7c96e348ce79b3ca2b.jpg",
+      reviews: []
     },
   ]);
 
@@ -403,6 +407,17 @@ const App = () => {
     );
   };
 
+  const handleEditReview = (previousReview, editedReview) => {
+    setGames((prevGames) => (
+      prevGames.map( 
+        (gameInMap) => 
+          ({
+            ...gameInMap, 
+            reviews: gameInMap.reviews.map( (reviewInMap) => (reviewInMap===previousReview ? editedReview : reviewInMap) ) 
+          }) 
+      ) 
+    ));
+  }
 
   // Switch que maneja qué componente se mostrará en pantalla
   // recibe como parámetro el valor "view" que contiene una cadena de caracteres con palabras clave
@@ -449,7 +464,7 @@ const App = () => {
         <ReviewList
           games={games} 
           currentUser={loggedUser}
-          // handleEditReview={handleSaveEditedReview} //Aqui editar reseña
+          handleEditReview={handleEditReview} //Aqui editar reseña
           handleDeleteReview={handleDeleteReview}
         />
         </CardWrapper>

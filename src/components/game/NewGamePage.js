@@ -20,7 +20,8 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
             desc:"",
             descCard:"",
             cardImg: "",
-            formImg:""
+            formImg:"",
+            reviews:[]
           }
     );
 
@@ -122,7 +123,8 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                 desc:"",
                 descCard:"",
                 cardImg: "",
-                formImg:""
+                formImg:"",
+                reviews: []
               });
             onSwitchView('main');
         }else{

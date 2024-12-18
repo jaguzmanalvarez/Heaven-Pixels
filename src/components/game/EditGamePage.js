@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { FadeInGame, FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
 import ConfirmModal from "../ConfirmModal";
 import { BackButton } from "../../styles/auth/AuthStyles";
+import styled from "styled-components";
+
+const CardWrapper = styled.div`
+  margin-top: 70px; /* Espacio entre el Navbar y la tarjeta */
+  `;
 
 const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
 
@@ -16,7 +21,8 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
             desc: game.desc,
             descCard: game.descCard,
             cardImg: game.cardImg,
-            formImg:game.formImg
+            formImg:game.formImg,
+            reviews: game.reviews,
           }
     );
 
@@ -134,7 +140,8 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
                     desc:"",
                     descCard:"",
                     cardImg: "",
-                    formImg:""
+                    formImg:"",
+                    reviews:[]
                   });
                   setCloseConfirmed(true);
             }else{
@@ -144,8 +151,26 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
         }
     }, [updateConfirmed])
 
+    const handleAddPlatform = () => {
+        if (newPlatform.trim()) {
+            setEditedGame((prev) => ({
+                ...prev,
+                platforms: [...prev.platforms, newPlatform.trim()]
+            }));
+            setNewPlatform(""); // Limpia el input después de añadir
+        }
+    };
+
+    const handleRemovePlatform = (index) => {
+        setEditedGame((prev) => ({
+            ...prev,
+            platforms: prev.platforms.filter((_, i) => i !== index)
+        }));
+    };
+    const [newPlatform, setNewPlatform] = useState(""); // Input para la nueva plataforma
+
     return(
-        <div>
+        <CardWrapper>
             {showCloseModal&& (<ConfirmModal title={"¿Cerrar edición?"} text={"Estás a punto de cancelar la edición el juego, ¿estás seguro de hacerlo?"} onCloseModal={handleStateCloseModal} onSetValue={setCloseConfirmed}/>)}
             {showModal&& (<ConfirmModal title={"¿Editar el juego?"} text={"Estás a punto de editar el juego, ¿estás seguro de hacerlo?"} onCloseModal={handleCloseModal} onSetValue={setUpdateConfirmed}/>)}
 
@@ -236,11 +261,67 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
                             onChange={handleChange} 
                             ref={cardImgRef}
                         ></GameInput>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                                                <GameInput
+                                                    value={newPlatform}
+                                                    type="text"
+                                                    placeholder="Añadir plataforma"
+                                                    onChange={(e) => setNewPlatform(e.target.value)}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={handleAddPlatform}
+                                                    style={{
+                                                        marginLeft: "10px",
+                                                        padding: "5px 10px",
+                                                        backgroundColor: "#007BFF",
+                                                        color: "#fff",
+                                                        border: "none",
+                                                        borderRadius: "5px",
+                                                        cursor: "pointer"
+                                                    }}
+                                                >
+                                                    Añadir
+                                                </button>
+                                            </div>
+                        <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+                        {editedGame.platforms.map((platform, index) => (
+                            <div
+                                key={index}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    marginRight: "10px", // Espacio entre los elementos
+                                    backgroundColor: "#f0f0f0",
+                                    padding: "5px 10px",
+                                    borderRadius: "20px",
+                                    marginBottom: "5px"
+                                }}
+                            >
+                                {platform}
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemovePlatform(index)}
+                                    style={{
+                                        marginLeft: "10px",
+                                        padding: "2px 5px",
+                                        backgroundColor: "red",
+                                        color: "#fff",
+                                        border: "none",
+                                        borderRadius: "3px",
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    X
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                     </GameInputGroup>
                     <SaveGameButton>Guardar cambios</SaveGameButton>
                 </form>
             </GameFormContainer>
-        </div>
+        </CardWrapper>
     );
 }
 
