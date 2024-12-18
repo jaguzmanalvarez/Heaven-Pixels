@@ -91,7 +91,7 @@ const CardGame = ({ game, onOpenModal, onOpenReview }) => {
         </div>
         <div>
           <Stars>★★★★★</Stars>
-          <ReviewLink onClick={(e) => {e.stopPropagation(); onOpenReview(game); }}>Aquí reseña</ReviewLink>
+          <ReviewLink onClick={(e) => {e.stopPropagation(); onOpenReview(game); }}>Añadir una reseña...</ReviewLink>
         </div>
       </DetailsContainer>
     </CardContainer>

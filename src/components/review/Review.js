@@ -87,23 +87,23 @@ const Button = styled.button`
 `;
 
 const Review = ({ game, onCloseModal, onSubmitReview }) => {
-  const [rating, setRating] = useState(0); // Estado de calificación
-  const [comment, setComment] = useState(""); // Estado del comentario
+  const [rating, setRating] = useState(0); 
+  const [comment, setComment] = useState(""); 
 
-  // Función para manejar la selección de estrellas
+  // Manejador para manejar la selección de estrellas
   const handleStarClick = (index) => {
-    setRating(index + 1); // Actualiza la calificación
+    setRating(index + 1);
   };
 
-  // Función para enviar la reseña
+  // Manejador para enviar la reseña
   const handleSubmit = () => {
     const reviewData = {
       gameTitle: game.title,
       rating,
       comment,
     };
-    onSubmitReview(reviewData); // Llama a la función de envío
-    onCloseModal(); // Cierra el modal
+    onSubmitReview(reviewData); 
+    onCloseModal(); 
   };
 
   return (

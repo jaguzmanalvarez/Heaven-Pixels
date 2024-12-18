@@ -10,7 +10,8 @@ import NewGamePage from './components/game/NewGamePage';
 import GameList from './components/game/GameList';
 import EditGamePage from './components/game/EditGamePage';
 import ConfirmModal from './components/ConfirmModal';
-import Review from './components/Review';
+import Review from './components/review/Review';
+import ReviewList from './components/review/ReviewList'
 
 const CardWrapper = styled.div`
   margin-top: 20px; /* Espacio entre el Navbar y la tarjeta */
@@ -29,7 +30,8 @@ const App = () => {
       desc:"De las mentes creativas de la serie Persona: Metaphor: ReFantazio es el primer RPG de fantasía a gran escala de ATLUS, creado por el director Katsura Hashino, el diseñador de personajes Shigenori Soejima y el compositor Shoji Meguro. Escribe tu destino y supera el miedo adentrándote en un mundo de fantasía que no se parece a nada que hayas visto antes. Cargado de inquietantes misterios, el reino se encuentra al borde del precipicio. Ahora debes embarcarte en un viaje, superando obstáculos y forjando lazos con tus amigos.",
       descCard:"Únete al arriesgado Torneo Real que promete horas de fascinantes descubrimientos y exploraciones.",
       cardImg: "https://m.media-amazon.com/images/M/MV5BYzdkOTBkMjctMWNhMy00MmEyLTg0OTktNDYwNTRlYzhkNzRmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-      formImg: "https://cdn.sega.co.uk/mhc-sega/public/content/media/images/raster/metaphor_horizontal_cover.jpg"
+      formImg: "https://cdn.sega.co.uk/mhc-sega/public/content/media/images/raster/metaphor_horizontal_cover.jpg",
+      reviews: []
     },
     {
       id: 1,
@@ -41,7 +43,8 @@ const App = () => {
       desc:"El roguelike de póquer. Balatro es un creador de mazos hipnotizante donde juegas manos de póquer ilegal, descubres comodines que cambian tu juego y activas combinaciones hilarantes y llenas de adrenalina. Combina manos válidas de póquer con comodines únicos para crear sinergias y construcciones variadas. Gana fichas suficientes para vencer ciegas engañosas y descubre manos y mazos de bonificación ocultos al avanzar. Necesitarás todas las ventajas que puedas conseguir para llegar a la ciega grande, vencer el ante final y asegurar la victoria.",
       descCard:"Balatro es un creador de mazos roguelike inspirado en el póquer donde creas poderosas sinergias y ganas a lo grande.",
       cardImg: "https://cdn.mobygames.com/covers/19339043-balatro-xbox-one-front-cover.png",
-      formImg: "https://eloutput.com/wp-content/uploads/2024/10/balatro-juego-cartas_0000_Balatro_keyart.jpg"
+      formImg: "https://eloutput.com/wp-content/uploads/2024/10/balatro-juego-cartas_0000_Balatro_keyart.jpg",
+      reviews: []
     },
     {
       id: 2,
@@ -53,7 +56,8 @@ const App = () => {
       desc:"Vive el siguiente capítulo de la historia del videojuego más longevo con 32 luchadores únicos rediseñados y domina el nuevo sistema Heat para aplastar a tus oponentes. Disfruta de gráficos de alta fidelidad, desarrollados para la nueva generación de hardware, para mostrar cada impacto y agresivos supermovimientos.",
       descCard:"La nueva entrega de la legendaria franquicia TEKKEN, llega con peleas de última generación!",
       cardImg: "https://m.media-amazon.com/images/I/615NuwMfPIL._AC_UF894,1000_QL80_.jpg",
-      formImg: "https://www.bandainamcostudios.com/en/wp-content/uploads/sites/2/2024/03/resized_TEKKEN_8_Third_KA_FINISH_4K_%E9%96%8B%E7%99%BA%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB.png"
+      formImg: "https://www.bandainamcostudios.com/en/wp-content/uploads/sites/2/2024/03/resized_TEKKEN_8_Third_KA_FINISH_4K_%E9%96%8B%E7%99%BA%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB.png",
+      reviews: []    
     },
     {
       id: 3,
@@ -65,7 +69,8 @@ const App = () => {
       desc:"La Nave nodriza PS5® se ha dañado, dejándolo a ASTRO y su tripulación robótica dispersos por todas las galaxias. Es hora de pilotear tu fiel DualSpeeder por más de 50 planetas llenos de diversión, peligro y sorpresas. En el trayecto, aprovecha al máximo los nuevos poderes de ASTRO y reúnete con muchos héroes icónicos del universo de PlayStation.",
       descCard:"Potencia tu juego de plataformas. Con tus nuevos poderes, lucha contra un nuevo elenco de villanos extravagantes y enormes jefes. ",
       cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202406/0500/8f15268257b878597757fcc5f2c9545840867bc71fc863b1.png",
-      formImg: "https://impulsogeek.com/wp-content/uploads/2024/09/Astro-Bot-Announce-Screenshot-00-1024x549.jpg"
+      formImg: "https://impulsogeek.com/wp-content/uploads/2024/09/Astro-Bot-Announce-Screenshot-00-1024x549.jpg",
+      reviews: []   
     },
     {
       id: 4,
@@ -77,7 +82,8 @@ const App = () => {
       desc:"DRAGON BALL: Sparking! ZERO lleva a un nuevo nivel el legendario estilo de juego de la serie Budokai Tenkaichi. Aprende a dominar a diversos personajes jugables, cada uno con sus habilidades, transformaciones y técnicas propias. Libera tu espíritu de lucha y pelea en escenarios que se derrumban y reaccionan a tu poder a medida que el combate se recrudece.",
       descCard:"¡Domina el poder destructivo de los luchadores más fuertes que han aparecido en DRAGON BALL!",
       cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202405/2216/cbb03393f0ab1149f2b89a8194ce19e596a24fa5bec6526a.png",
-      formImg: "https://cdn.atomix.vg/wp-content/uploads/2024/12/boll.jpg"
+      formImg: "https://cdn.atomix.vg/wp-content/uploads/2024/12/boll.jpg",
+      reviews: []
     },
   ]);
 
@@ -99,10 +105,10 @@ const App = () => {
     },
     {
       id: 2,
-      userName:"McSter",
+      userName:"MacSter",
       isAdmin: false,
       password: "3333",
-      pic: "https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg"
+      pic: "https://images7.memedroid.com/images/UPLOADED580/668c8b67eaaf6.jpeg"
     },
     {
       id: 3,
@@ -151,7 +157,8 @@ const App = () => {
       desc:"",
       descCard:"",
       cardImg: "",
-      formImg:""
+      formImg:"",
+      reviews: []
     }
   );
 
@@ -256,16 +263,45 @@ const App = () => {
 
   // Manejador para abrir el modal de reseña
   const handleOpenReview = (game) => {
+    if (!isAuth) { switchView("login"); return;}
     setSelectedGame(game);
     setReviewModalVisible(true);
   };
 
   // Manejador para manejar el envío de reseñas
   const handleSubmitReview = (reviewData) => {
-    console.log('Reseña enviada:', reviewData);
+    if (!isAuth) { 
+      switchView("login"); 
+      return;
+    }
+  
+    const reviewWithUser = {
+      ...reviewData, 
+      author: loggedUser.userName, 
+      userImage: loggedUser.pic,
+      gameName: selectedGame.title,
+      gameImage: selectedGame.cardImg
+    };
+  
+    const updatedGames = games.map((game) =>
+      game.id === selectedGame.id 
+        ? { ...game, reviews: [...game.reviews, reviewWithUser] } 
+        : game
+    );
+    setGames(updatedGames);
     handleCloseReviewModal();
   };
   
+
+  // Manejador para editar una reseña
+  const handleEditReview = (review, gameId) => {
+    console.log('Editar reseña', review, gameId);
+  };
+  
+  // Manejador para eliminar una reseña
+  const handleDeleteReview = (review, gameId) => {
+    console.log('Eliminar reseña', review, gameId);
+  };
 
   // Switch que maneja qué componente se mostrará en pantalla
   // recibe como parámetro el valor "view" que contiene una cadena de caracteres con palabras clave
@@ -295,6 +331,27 @@ const App = () => {
       <div className="App">
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
         <EditGamePage game={selectedGame} onSwitchView={switchView} handleEdit={handleEditGame} onCloseEditPage={handleShowEditPage}/>
+      </div>
+    );
+
+    case 'mygames':
+    if (!isAuth) {
+      switchView("login");
+      return null;
+    }
+
+    // Filtrar juegos con reseñas
+    return (
+      <div className="App">
+        <NavBar key={isAuth ? loggedUser.id : 101} user={isAuth ? loggedUser : null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut} />
+        <CardWrapper>
+        <ReviewList
+          games={games} 
+          currentUser={loggedUser}
+          handleEditReview={handleEditReview}
+          handleDeleteReview={handleDeleteReview}
+        />
+        </CardWrapper>
       </div>
     );
 
