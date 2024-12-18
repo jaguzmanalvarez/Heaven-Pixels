@@ -1,21 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { GameImage } from '../../styles/game/GameStyles';
 
 // Contenedor principal de la tarjeta
 const CardContainer = styled.div`
   display: flex;
-  width: 500px;
+  width: 400px;
   height: 280px;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   background-color: #ffffff;
-`;
+  margin: 30px 40px;
+  transition: box-shadow 0.25s;
+  cursor: pointer;
 
-// Imagen del juego
-const GameImage = styled.img`
-  width: 40%;
-  object-fit: cover;
+  &:hover{
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+  }
 `;
 
 // Contenedor de detalles (derecha)
@@ -76,27 +78,25 @@ const ReviewLink = styled.a`
 `;
 
 // Componente principal
-const CardGame = () => {
+const CardGame = ({ game, onOpenModal, onOpenReview }) => {
   return (
-    <CardContainer>
-      <GameImage
-        src="https://image.api.playstation.com/vulcan/ap/rnd/202405/2406/672cc5f97e84c564649093d4f6a3726f328e0de1814ab2e0.png" // Reemplaza con tu imagen
-        alt="Metaphor: Re Fantazio"
-      />
+    <CardContainer onClick={() => onOpenModal(game)}>
+      <GameImage src={game.cardImg} alt={game.title} />
       <DetailsContainer>
         <div>
-          <Title>Metaphor: Re Fantazio</Title>
-          <Year>2024</Year>
-          <Description>Inserte descripción</Description>
+          <Title>{game.title}</Title>
+          <Year>{game.date}</Year>
+          <Description>{game.descCard}</Description>
           <Divider />
         </div>
         <div>
           <Stars>★★★★★</Stars>
-          <ReviewLink href="#">Aquí reseña</ReviewLink>
+          <ReviewLink onClick={(e) => {e.stopPropagation(); onOpenReview(game); }}>Añadir una reseña...</ReviewLink>
         </div>
       </DetailsContainer>
     </CardContainer>
   );
 };
+
 
 export default CardGame;
