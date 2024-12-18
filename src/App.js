@@ -14,7 +14,31 @@ import Review from './components/review/Review';
 import ReviewList from './components/review/ReviewList'
 
 const CardWrapper = styled.div`
-  margin-top: 20px; /* Espacio entre el Navbar y la tarjeta */
+  margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
+  `;
+
+const SearchBox = styled.input`
+  margin-top: 20px; /* Espacio superior */
+  margin-right: 20px; /* Espacio derecho */
+  width: 200px; /* Tamaño más pequeño */
+  padding: 6px 10px; /* Espacio interno reducido */
+  font-size: 14px; /* Fuente más pequeña */
+  color: #333; /* Color de texto oscuro */
+  background-color: transparent; /* Fondo transparente */
+  border: 1px solid #aaa; /* Borde delgado gris */
+  border-radius: 15px; /* Bordes redondeados */
+  outline: none;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #aaa; /* Color de texto del placeholder */
+    font-style: italic;
+  }
+
+  &:focus {
+    border-color: #5a6ee1; /* Color al enfocar */
+    box-shadow: 0px 2px 4px rgba(90, 110, 225, 0.3); /* Sombra sutil */
+  }
 `;
 
 const App = () => {
@@ -84,6 +108,54 @@ const App = () => {
       cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202405/2216/cbb03393f0ab1149f2b89a8194ce19e596a24fa5bec6526a.png",
       formImg: "https://cdn.atomix.vg/wp-content/uploads/2024/12/boll.jpg",
       reviews: []
+    },
+    {
+      id: 5,
+      title: "Helldivers 2",
+      date: "08/02/2024",
+      dev: "Arrowhead Game Studios",
+      publisher: "Sony Interactive Entertainment",
+      platforms: ["PlayStation 5", "Windows"],
+      desc:"Ponte las botas de Helldiver, un soldado de élite cuya misión es difundir la paz, la libertad y la Democracia Tutelada usando las herramientas más enormes y explosivas de toda la galaxia. Los Helldivers no empiezan una misión sin los refuerzos adecuados, pero de ti depende cómo y cuándo pedirlos. No solo cuentas con una variedad de armas principales superpoderosas y arsenales personalizables, sino que también puedes usar estratagemas durante las partidas. ",
+      descCard:"Acompaña a los Helldivers a luchar por la libertad en una galaxia hostil.",
+      cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202309/0718/2c253de3117182b4a09d02ad16ebc51a25d4ea9208a5d057.jpg",
+      formImg: "https://sm.ign.com/ign_latam/news/h/helldivers/helldivers-2-developer-insists-sony-acquisition-rumor-is-fak_arqg.jpg"
+    },
+    {
+      id: 6,
+      title: "Hi-Fi Rush",
+      date: "25/01/2023",
+      dev: "Tango Gameworks",
+      publisher: "Bethesda Softworks",
+      platforms: ["Xbox series", "Windows"],
+      desc:"Chai contra el mundo! Juega como el aspirante a estrella de rock Chai, considerado mutante después de que un músico se fusiona accidentalmente a su corazón. Aprovecha la capacidad de Chai de sentir el ritmo a su alrededor y lucha contra los jefes corporativos decididos a 'retirarlo'.",
+      descCard:"Lucha contra robots enemigos con ritmos feroces en este emocionante juego de acción.",
+      cardImg: "https://images.mweb.bethesda.net/_images/images.ctfassets.net/tehqz6o3okv8/2eZHOuPHrSCuP5Y4VpmcZA/247c20de2544c3cfe9e78d98c1aa2524/HFR-box-standard.webp?f=jpg&h=1000&w=779&s=jnbkJw0fra-wn-ZNG3nW3eMAnjAxyeVS7e-aQz8HrLE",
+      formImg: "https://multiplayer.net-cdn.it/thumbs/images/2024/05/08/hi-fi-rush-2_jpg_1376x774_crop_q85.jpg"
+    },
+    {
+      id: 7,
+      title: "Marvel's Spider-Man 2",
+      date: "20/10/2023",
+      dev: "Insomniac Games",
+      publisher: "Sony Interactive Entertainment",
+      platforms: ["PlayStation 5", "Windows"],
+      desc:"Balancéate, salta y utiliza las nuevas alas de telaraña para recorrer toda la ciudad de Nueva York de Marvel. También podrás cambiar rápidamente entre Peter Parker y Miles Morales para vivir diferentes historias y canalizar poderes nuevos y épicos, mientras el emblemático villano Venom amenaza con destruir sus vidas, la ciudad y a todos sus seres queridos.",
+      descCard:"Los Spider-Men Peter Parker y Miles Morales regresan para una nueva y emocionante aventura.",
+      cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
+      formImg: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/97e9f5fa6e50c185d249956c6f198a2652a9217e69a59ecd.jpg"
+    },
+    {
+      id: 8,
+      title: "Super Mario Bros. Wonder",
+      date: "20/10/2024",
+      dev: "Nintendo EPD Production Group No. 10",
+      publisher: "Nintendo",
+      platforms: ["Nintendo Switch"],
+      desc:"¡El estilo de juego clásico de los juegos de Mario será toda una locura con la adición de la Flor Maravilla en el juego Super Mario Bros. Wonder! Estos revolucionarios objetos activarán espectaculares momentos que tendrás que ver para creer. ¡Mira cómo las tuberías cobran vida, siembra el caos como una inmensa bola con picos y mucho más!",
+      descCard:"El estilo de juego clásico de desplazamiento lateral de los juegos de Mario será toda una locura con la adición de la Flor Maravilla.",
+      cardImg: "https://i.ebayimg.com/images/g/CxYAAOSwNwVlMlwF/s-l400.jpg",
+      formImg: "https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/dde58e70727aad7c96e348ce79b3ca2b.jpg"
     },
   ]);
 
@@ -165,7 +237,7 @@ const App = () => {
 
   // Manejador para crear un nuevo juego
   const handleCreateGame = (newGame) => {
-    setGames([...games, {...newGame, id: games.length +1}]);
+    setGames([...games, {...newGame, id: games[games.length-1].id +1}]);
     return true;
   }
 
@@ -175,6 +247,26 @@ const App = () => {
     setSelectedGame(editedGame);
     return true;
   }
+
+  const handleDeleteGame = (isAccepted) => {
+    if(isAccepted){
+      setModalVisible(false);
+      setGames(games.filter((game)=>(game.id!==selectedGame.id)));
+    }else{
+      setModalVisible(true);
+    }
+  }
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+
+  const filteredGames = games.filter((game) =>
+    game.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   // Manejadores de la ventana modal para mostrar la información del juego
   const [modalVisible, setModalVisible] = useState(false);
@@ -220,8 +312,14 @@ const App = () => {
   // Manejador para abrir la modal de eliminación de juego
   const [showDeleteGameModal, setShowDeleteGameModal] = useState(false);
   const handleShowDeleteGameModal = () => {
-
+    setModalVisible(false);
+    setShowDeleteGameModal(true);
   }
+  
+  const handleHideDeleteGameModal = () => {
+    setShowDeleteGameModal(false);
+  }
+
 
   // Manejador de vista de la aplicación
   const [view, setView] = useState('main');
@@ -360,14 +458,16 @@ const App = () => {
 
     default: return(
       <div className="App">
-        {showDeleteGameModal && (<ConfirmModal title={"Eliminar juego"} text={"Estás a punto de eliminar "+selectedGame.title+" desarrollado por "+selectedGame.dev+". ¿Estás seguro de realizar esta acción?"}/>)}
+        {showDeleteGameModal && (<ConfirmModal title={"Eliminar juego"} text={"Estás a punto de eliminar "+selectedGame.title+" desarrollado por "+selectedGame.dev+". ¿Estás seguro de realizar esta acción?"} onSetValue={handleDeleteGame} onCloseModal={handleHideDeleteGameModal} isDelete={true}/> )}
         {modalVisible && ( <GameModalPage game={selectedGame} onCloseModal={handleCloseModal} isAdmin={loggedUser.isAdmin} onEditGame={handleShowEditPage} onDeleteGame={handleShowDeleteGameModal}/>) }
         {reviewModalVisible && (<Review game={selectedGame} onCloseModal={handleCloseReviewModal} onSubmitReview={handleSubmitReview}/>)}
 
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
         
+        
         <CardWrapper>
-          <GameList games={games} handleOpenModal={handleOpenModal} onOpenReview={handleOpenReview}/>
+          <SearchBox type="text" placeholder="Buscar juego..." value={searchQuery} onChange={handleSearchChange}/>
+          <GameList games={filteredGames} handleOpenModal={handleOpenModal} onOpenReview={handleOpenReview}/>
         </CardWrapper>
       </div>
     );

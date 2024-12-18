@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CancelButton, FadeInGame, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
+import { CancelButton, FadeInGame, FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
+import { BackButton } from "../../styles/auth/AuthStyles";
+import styled from 'styled-components';
+
+const CardWrapper = styled.div`
+  margin-top: 70px; /* Espacio entre el Navbar y la tarjeta */
+  `;
 
 const NewGamePage = ({onSwitchView, handleCreate}) => {
 
@@ -37,9 +43,10 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
         titleRef.current.focus()
     }, [])
 
-    const handleError = (message) => {
+    const handleError = (message, focusRef) => {
         setFailMessage(message);
         setFailed(true);
+        focusRef.current.focus();
     }
 
     // Manejador de cambios en los inputs presentados en la pantalla
@@ -51,45 +58,38 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if(!newGame.title){
-            handleError('Llenar el campo de título');
-            titleRef.current.focus();
+            handleError('Llenar el campo de título', titleRef);
             return;
         }
         if(!newGame.date){
-            handleError('Llenar el campo de fecha de salida');
-            dateRef.current.focus();
+            handleError('Llenar el campo de fecha de lanzamiento', dateRef);
             return;
         }
         if(!newGame.dev){
-            handleError('Llenar el campo de desarrolladora');
-            devRef.current.focus();
+            handleError('Llenar el campo de desarrolladora',devRef);
             return;
         }
         if(!newGame.publisher){
-            handleError('Llenar el campo de publisher');
-            publisherRef.current.focus();
+            handleError('Llenar el campo de publisher',publisherRef);
             return;
         }
         if(!newGame.desc){
-            handleError('Llenar el campo de descripción');
-            descRef.current.focus();
-            return;
-        }
-        if(!newGame.descCard){
-            handleError('Llenar el campo de descripción para la tarjeta');
-            descCardRef.current.focus();
+            handleError('Llenar el campo de descripción',descRef);
             return;
         }
         if(!newGame.formImg){
-            handleError('Llenar el campo de imagen');
-            formImgRef.current.focus();
+            handleError('Llenar el campo de imagen',formImgRef);
+            return;
+        }
+        if(!newGame.descCard){
+            handleError('Llenar el campo de descripción para la tarjeta',descCardRef);
             return;
         }
         if(!newGame.cardImg){
-            handleError('Llenar el campo de imagen para la tarjeta');
-            cardImgRef.current.focus();
+            handleError('Llenar el campo de imagen para la tarjeta',cardImgRef);
             return;
         }
 
@@ -114,11 +114,21 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
     }
 
     return(
+        <CardWrapper>
         <GameFormContainer>
-            <button onClick={()=>{onSwitchView('main')}}>Cerrar ventana</button>
+            <BackButton onClick={() => onSwitchView("main")}>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                >
+                    <path d="M15.5 19l-7-7 7-7" />
+                </svg>
+                Regresar
+            </BackButton>
             <h2>Agregar nuevo videojuego</h2>
-            {failed && (<FadeInGame><WarningLabel>{failMessage}</WarningLabel></FadeInGame>)}
-            
+            {failed && (<FailGameMessage>{failMessage}</FailGameMessage>)}
+            <form onSubmit={(e)=>handleSubmit(e)}>
                 <GameInputGroup>
                     <GameLabel>Título:</GameLabel>
                     <GameInput 
@@ -193,9 +203,10 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         ref={cardImgRef}
                     ></GameInput>
                 </GameInputGroup>
-                <SaveGameButton onClick={handleSubmit}>Guardar</SaveGameButton>
-            <CancelButton>Cancelar</CancelButton>
+                <SaveGameButton onClick={()=>{setFailed(false);}}>Guardar</SaveGameButton>
+            </form>
         </GameFormContainer>
+        </CardWrapper>
     );
 }
 
