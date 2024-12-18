@@ -53,7 +53,8 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if(!newGame.title){
             handleError('Llenar el campo de título', titleRef);
             return;

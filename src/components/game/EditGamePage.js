@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FadeInGame, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
+import { FadeInGame, FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
 import ConfirmModal from "../ConfirmModal";
 import { BackButton } from "../../styles/auth/AuthStyles";
 
@@ -150,7 +150,7 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
             {showModal&& (<ConfirmModal title={"¿Editar el juego?"} text={"Estás a punto de editar el juego, ¿estás seguro de hacerlo?"} onCloseModal={handleCloseModal} onSetValue={setUpdateConfirmed}/>)}
 
             <GameFormContainer>
-                <BackButton onClick={handleStateCloseModal}>
+            <BackButton onClick={handleStateCloseModal}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -161,7 +161,7 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
                 Regresar
             </BackButton>
                 <h2>Editar videojuego existente</h2>
-                {failed && (<FadeInGame><WarningLabel>{failMessage}</WarningLabel></FadeInGame>)}
+                {failed && (<FailGameMessage>{failMessage}</FailGameMessage>)}
                 <form onSubmit={(e)=>{handleSubmit(e)}}>
                     <GameInputGroup>
                         <GameLabel>Título:</GameLabel>

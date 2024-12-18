@@ -109,8 +109,8 @@ const GameModalPage = ({game, onCloseModal, isAdmin, onEditGame, onDeleteGame}) 
                 </div>
                 {isAdmin &&(
                         <div>
-                            <button onClick={onEditGame}>Editar</button>
-                            <button onClick={onDeleteGame}>Eliminar</button>
+                            <EditGameButton style={{marginRight:"10px"}} onClick={onEditGame}>Editar</EditGameButton>
+                            <DeleteGameButton onClick={onDeleteGame}>Eliminar</DeleteGameButton>
                         </div>
                     )}
                 <hr />
