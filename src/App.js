@@ -10,6 +10,7 @@ import NewGamePage from './components/game/NewGamePage';
 import GameList from './components/game/GameList';
 import EditGamePage from './components/game/EditGamePage';
 import ConfirmModal from './components/ConfirmModal';
+import Review from './components/Review';
 
 const CardWrapper = styled.div`
   margin-top: 20px; /* Espacio entre el Navbar y la tarjeta */
@@ -244,6 +245,28 @@ const App = () => {
     setIsAuth(false);
   }
 
+  // Manejador para abrir la modal de reseña
+  const [reviewModalVisible, setReviewModalVisible] = useState(false);
+
+  // Manejador para cerrar el modal de reseña
+  const handleCloseReviewModal = () => {
+    setReviewModalVisible(false);
+    setSelectedGame(null);
+  };
+
+  // Manejador para abrir el modal de reseña
+  const handleOpenReview = (game) => {
+    setSelectedGame(game);
+    setReviewModalVisible(true);
+  };
+
+  // Manejador para manejar el envío de reseñas
+  const handleSubmitReview = (reviewData) => {
+    console.log('Reseña enviada:', reviewData);
+    handleCloseReviewModal();
+  };
+  
+
   // Switch que maneja qué componente se mostrará en pantalla
   // recibe como parámetro el valor "view" que contiene una cadena de caracteres con palabras clave
   // login para LoginPage, register para RegisterPage
@@ -279,11 +302,12 @@ const App = () => {
       <div className="App">
         {showDeleteGameModal && (<ConfirmModal title={"Eliminar juego"} text={"Estás a punto de eliminar "+selectedGame.title+" desarrollado por "+selectedGame.dev+". ¿Estás seguro de realizar esta acción?"}/>)}
         {modalVisible && ( <GameModalPage game={selectedGame} onCloseModal={handleCloseModal} isAdmin={loggedUser.isAdmin} onEditGame={handleShowEditPage} onDeleteGame={handleShowDeleteGameModal}/>) }
+        {reviewModalVisible && (<Review game={selectedGame} onCloseModal={handleCloseReviewModal} onSubmitReview={handleSubmitReview}/>)}
 
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
         
         <CardWrapper>
-          <GameList games={games} handleOpenModal={handleOpenModal}/>
+          <GameList games={games} handleOpenModal={handleOpenModal} onOpenReview={handleOpenReview}/>
         </CardWrapper>
       </div>
     );
