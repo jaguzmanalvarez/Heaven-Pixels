@@ -11,6 +11,8 @@ const ReviewCard = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 15px;
   text-align: center;
+  min-height: 200px; /* Asegurar un tamaño mínimo */
+  max-height: auto; /* Permitir que el tamaño dependa del contenido */
 `;
 
 const GameImage = styled.img`
@@ -31,22 +33,49 @@ const StarContainer = styled.div`
   font-size: 40px;
 `;
 
-const ButtonContainer = styled.div`
-  margin-top: 10px;
-`;
-
-const Button = styled.button`
-  background-color: #6200ea;
+const BlueButton = styled.button`
+  background: linear-gradient(135deg, #5c6fff, #788bff);
   color: white;
   border: none;
-  padding: 5px 15px;
-  border-radius: 5px;
+  padding: 6px 12px; /* Tamaño reducido para el botón */
+  border-radius: 20px; /* Ajustar para que el botón se vea proporcional */
+  font-size: 0.8rem; /* Texto más pequeño */
+  font-weight: 500; /* Menos grueso */
   cursor: pointer;
-  margin-right: 10px;
-  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra más suave */
 
   &:hover {
-    background-color: #3700b3;
+    background: linear-gradient(135deg, #4956d4, #5c6fff);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra ligeramente más prominente */
+    transform: translateY(-2px); /* Menor desplazamiento */
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+const RedButton = styled.button`
+  background: linear-gradient(135deg,rgb(253, 97, 97),rgb(251, 56, 56)); /* Rojo con tonos más intensos */
+  color: white;
+  border: none;
+  padding: 6px 12px; /* Tamaño reducido para el botón */
+  border-radius: 20px; /* Ajustar para que el botón se vea proporcional */
+  font-size: 0.8rem; /* Texto más pequeño */
+  font-weight: 500; /* Menos grueso */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: linear-gradient(135deg,rgb(248, 30, 30),rgb(251, 97, 97)); /* Rojo oscuro para el hover */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;
 
@@ -89,9 +118,26 @@ const ModalContent = styled.div`
 `;
 
 const ModalActions = styled.div`
-  margin-top: 20px;
   display: flex;
   justify-content: space-around;
+  margin-top: 20px;
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    &:first-child {
+      background-color: #e60000;
+      color: white;
+    }
+
+    &:last-child {
+      background-color: #ddd;
+      color: white;
+    }
+  }
 `;
 
 const ModalContainer = styled.div`
@@ -135,12 +181,6 @@ const TextArea = styled.textarea`
   padding: 10px;
   font-size: 1rem;
   resize: none;
-`;
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
 `;
 
 const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }) => {
@@ -222,10 +262,10 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
             <StarContainer>{renderStars(review.rating)}</StarContainer>
             <ReviewText>{review.comment}</ReviewText>
 
-            <ButtonContainer>
-              <Button onClick={() => handleEditClick(review)}>Editar</Button>
-              <Button onClick={() => handleDeleteClick(review)}>Eliminar</Button>
-            </ButtonContainer>
+            <ModalActions>
+              <BlueButton onClick={() => handleEditClick(review)}>Editar</BlueButton>
+              <RedButton onClick={() => handleDeleteClick(review)}>Eliminar</RedButton>
+            </ModalActions>
           </ReviewCard>
         ))}
       </GamelistDiv>
@@ -235,12 +275,8 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
           <ModalContent>
             <h2>¿Estás seguro que deseas eliminar esta reseña?</h2>
             <ModalActions>
-              <button onClick={handleConfirmDelete} style={{ backgroundColor: "#ddd", color: "#333" }}>
-                Aceptar
-              </button>
-              <button onClick={handleCancelDelete} style={{ backgroundColor: "#e60000", color: "white" }}>
-                Cancelar
-              </button>
+              <BlueButton onClick={handleConfirmDelete} > Aceptar </BlueButton>
+              <RedButton onClick={handleCancelDelete} > Cancelar </RedButton>
             </ModalActions>
           </ModalContent>
         </Modal>
@@ -272,10 +308,10 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
                 onChange={(e) => setNewComment(e.target.value)}
               />
             </div>
-            <ButtonsContainer>
-              <Button onClick={() => setIsEditModalOpen(false)}>Cancelar</Button>
-              <Button onClick={handleSaveEdit}>Guardar Cambios</Button>
-            </ButtonsContainer>
+            <ModalActions>
+              <RedButton onClick={() => setIsEditModalOpen(false)}>Cancelar</RedButton>
+              <BlueButton onClick={handleSaveEdit}>Guardar Cambios</BlueButton>
+            </ModalActions>
           </ModalContent>
         </ModalContainer>
       )}
