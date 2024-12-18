@@ -122,7 +122,6 @@ const Navbar = ( {user, isAuth, onSwitchView, onLogOut} ) => {
           <ListUserMenu>
             <DropDownMenuItem onClick={()=>{handleClick('profile')}}>Perfil</DropDownMenuItem>
             {user.isAdmin===true && (<DropDownMenuItem onClick={()=>{handleClick('newgame')}} >Nuevo Juego</DropDownMenuItem>)}
-            <DropDownMenuItem onClick={()=>{handleClick('options')}}>Opciones</DropDownMenuItem>
             <DropDownMenuItemLogout onClick={() => {onLogOut(); onSwitchView('main');}}> Cerrar sesión</DropDownMenuItemLogout>
           </ListUserMenu>
         </DropDownUserMenu>
