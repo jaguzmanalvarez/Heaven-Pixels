@@ -90,7 +90,7 @@ const CardGame = ({ game, onOpenModal, onOpenReview }) => {
           <Divider />
         </div>
         <div>
-          <Stars>★★★★★</Stars>
+          <Stars> </Stars>
           <ReviewLink onClick={(e) => {e.stopPropagation(); onOpenReview(game); }}>Añadir una reseña...</ReviewLink>
         </div>
       </DetailsContainer>

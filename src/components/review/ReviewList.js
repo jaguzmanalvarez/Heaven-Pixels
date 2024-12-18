@@ -127,7 +127,7 @@ const StarsContainer = styled.div`
 `;
 
 const TextArea = styled.textarea`
-  width: 95%;
+  width: 100%;
   height: 100px;
   margin-top: 10px;
   border-radius: 5px;
@@ -142,6 +142,8 @@ const ButtonsContainer = styled.div`
   justify-content: space-between;
   margin-top: 20px;
 `;
+
+
 
 const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -245,7 +247,41 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
 
       {isEditModalOpen && (
         <Modal>
-
+          <ModalContent>
+            <h2>Editar Reseña</h2>
+            <div>
+              <label>
+                Calificación:
+                <input
+                  type="number"
+                  value={newRating}
+                  onChange={(e) => setNewRating(Number(e.target.value))}
+                  min="1"
+                  max="5"
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                Comentario:
+                <textarea
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+              </label>
+            </div>
+            <ModalActions>
+              <button onClick={handleSaveEdit} style={{ backgroundColor: "#ddd", color: "#333" }}>
+                Guardar Cambios
+              </button>
+              <button
+                onClick={() => setIsEditModalOpen(false)}
+                style={{ backgroundColor: "#e60000", color: "white" }}
+              >
+                Cancelar
+              </button>
+            </ModalActions>
+          </ModalContent>
         </Modal>
       )}
 
