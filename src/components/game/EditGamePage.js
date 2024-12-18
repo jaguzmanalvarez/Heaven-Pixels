@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { FadeInGame, FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
 import ConfirmModal from "../ConfirmModal";
 import { BackButton } from "../../styles/auth/AuthStyles";
+import styled from "styled-components";
+
+const CardWrapper = styled.div`
+  margin-top: 70px; /* Espacio entre el Navbar y la tarjeta */
+  `;
 
 const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
 
@@ -145,7 +150,7 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
     }, [updateConfirmed])
 
     return(
-        <div>
+        <CardWrapper>
             {showCloseModal&& (<ConfirmModal title={"¿Cerrar edición?"} text={"Estás a punto de cancelar la edición el juego, ¿estás seguro de hacerlo?"} onCloseModal={handleStateCloseModal} onSetValue={setCloseConfirmed}/>)}
             {showModal&& (<ConfirmModal title={"¿Editar el juego?"} text={"Estás a punto de editar el juego, ¿estás seguro de hacerlo?"} onCloseModal={handleCloseModal} onSetValue={setUpdateConfirmed}/>)}
 
@@ -240,7 +245,7 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
                     <SaveGameButton>Guardar cambios</SaveGameButton>
                 </form>
             </GameFormContainer>
-        </div>
+        </CardWrapper>
     );
 }
 
