@@ -11,18 +11,29 @@ const ReviewCard = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 15px;
   text-align: center;
+  transition: box-shadow 0.25s;
+
+  &:hover{
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+  }
 `;
 
 const GameImage = styled.img`
-  width: 90%;
-  height: 65%;
+  width: 80%;
+  height: 56%;
   border-radius: 8px;
 `;
 
 const ReviewText = styled.p`
   font-size: 14px;
   color: #555;
-  margin: 10px 0;
+  margin: 10px 7px;
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
+  max-width: 500px;
+  max-height: 60px; 
+  overflow-y: auto; 
+  text-overflow: ellipsis; 
 `;
 
 const StarContainer = styled.div`
@@ -73,6 +84,15 @@ const GamelistDiv = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `;
+
+const ReviewContainer = styled.div`
+  width: 50%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 
 const Modal = styled.div`
   position: fixed;
@@ -223,10 +243,9 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
         {userReviews.map((review, index) => (
           <ReviewCard key={index}>
             <GameImage src={review.gameImage} alt={review.gameName} />
-            <GameTitle>{review.gameName}</GameTitle>
+              <GameTitle>{review.gameName}</GameTitle>
             <StarContainer>{renderStars(review.rating)}</StarContainer>
-            <ReviewText>{review.comment}</ReviewText>
-
+              <ReviewText>{review.comment}</ReviewText>
             <ButtonContainer>
               <Button onClick={() => handleEditClick(review)}>Editar</Button>
               <Button onClick={() => handleDeleteClick(review)}>Eliminar</Button>
