@@ -10,6 +10,7 @@ import NewGamePage from './components/game/NewGamePage';
 import GameList from './components/game/GameList';
 import EditGamePage from './components/game/EditGamePage';
 import ConfirmModal from './components/ConfirmModal';
+import Review from './components/Review';
 
 const CardWrapper = styled.div`
   margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
@@ -205,7 +206,7 @@ const App = () => {
 
   // Manejador para crear un nuevo juego
   const handleCreateGame = (newGame) => {
-    setGames([...games, {...newGame, id: games.length +1}]);
+    setGames([...games, {...newGame, id: games[games.length-1].id +1}]);
     return true;
   }
 
@@ -214,6 +215,15 @@ const App = () => {
     setGames(games.map((game)=>(game.id === editedGame.id ? editedGame : game)));
     setSelectedGame(editedGame);
     return true;
+  }
+
+  const handleDeleteGame = (isAccepted) => {
+    if(isAccepted){
+      setModalVisible(false);
+      setGames(games.filter((game)=>(game.id!==selectedGame.id)));
+    }else{
+      setModalVisible(true);
+    }
   }
 
   // Manejadores de la ventana modal para mostrar la información del juego
@@ -260,8 +270,14 @@ const App = () => {
   // Manejador para abrir la modal de eliminación de juego
   const [showDeleteGameModal, setShowDeleteGameModal] = useState(false);
   const handleShowDeleteGameModal = () => {
-
+    setModalVisible(false);
+    setShowDeleteGameModal(true);
   }
+  
+  const handleHideDeleteGameModal = () => {
+    setShowDeleteGameModal(false);
+  }
+
 
   // Manejador de vista de la aplicación
   const [view, setView] = useState('main');
@@ -291,6 +307,28 @@ const App = () => {
     setLoggedUser({id:-1, userName:"", password:"", pic: ""});
     setIsAuth(false);
   }
+
+  // Manejador para abrir la modal de reseña
+  const [reviewModalVisible, setReviewModalVisible] = useState(false);
+
+  // Manejador para cerrar el modal de reseña
+  const handleCloseReviewModal = () => {
+    setReviewModalVisible(false);
+    setSelectedGame(null);
+  };
+
+  // Manejador para abrir el modal de reseña
+  const handleOpenReview = (game) => {
+    setSelectedGame(game);
+    setReviewModalVisible(true);
+  };
+
+  // Manejador para manejar el envío de reseñas
+  const handleSubmitReview = (reviewData) => {
+    console.log('Reseña enviada:', reviewData);
+    handleCloseReviewModal();
+  };
+  
 
   // Switch que maneja qué componente se mostrará en pantalla
   // recibe como parámetro el valor "view" que contiene una cadena de caracteres con palabras clave
@@ -325,13 +363,14 @@ const App = () => {
 
     default: return(
       <div className="App">
-        {showDeleteGameModal && (<ConfirmModal title={"Eliminar juego"} text={"Estás a punto de eliminar "+selectedGame.title+" desarrollado por "+selectedGame.dev+". ¿Estás seguro de realizar esta acción?"}/>)}
+        {showDeleteGameModal && (<ConfirmModal title={"Eliminar juego"} text={"Estás a punto de eliminar "+selectedGame.title+" desarrollado por "+selectedGame.dev+". ¿Estás seguro de realizar esta acción?"} onSetValue={handleDeleteGame} onCloseModal={handleHideDeleteGameModal} isDelete={true}/> )}
         {modalVisible && ( <GameModalPage game={selectedGame} onCloseModal={handleCloseModal} isAdmin={loggedUser.isAdmin} onEditGame={handleShowEditPage} onDeleteGame={handleShowDeleteGameModal}/>) }
+        {reviewModalVisible && (<Review game={selectedGame} onCloseModal={handleCloseReviewModal} onSubmitReview={handleSubmitReview}/>)}
 
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
         
         <CardWrapper>
-          <GameList games={games} handleOpenModal={handleOpenModal}/>
+          <GameList games={games} handleOpenModal={handleOpenModal} onOpenReview={handleOpenReview}/>
         </CardWrapper>
       </div>
     );

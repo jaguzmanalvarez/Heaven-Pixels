@@ -8,11 +8,11 @@ const GamelistDiv = styled.div`
     justify-content: center;
 `;
 
-const GameList = ({games, handleOpenModal}) => {
+const GameList = ({games, handleOpenModal, onOpenReview}) => {
     return (
         <GamelistDiv>
             {games.map((game) => (  
-                <CardGame key={game.id} game={game} onOpenModal={handleOpenModal}/>
+                <CardGame key={game.id} game={game} onOpenModal={handleOpenModal} onOpenReview={onOpenReview}/>
             ))}
         </GamelistDiv>
     );
