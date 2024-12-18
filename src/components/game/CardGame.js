@@ -78,10 +78,10 @@ const ReviewLink = styled.a`
 `;
 
 // Componente principal
-const CardGame = ({ game, onOpenModal }) => {
+const CardGame = ({ game, onOpenModal, onOpenReview }) => {
   return (
-    <CardContainer onClick={()=>{onOpenModal(game)}}>
-      <GameImage src={game.cardImg} alt={game.title}/>
+    <CardContainer onClick={() => onOpenModal(game)}>
+      <GameImage src={game.cardImg} alt={game.title} />
       <DetailsContainer>
         <div>
           <Title>{game.title}</Title>
@@ -91,11 +91,12 @@ const CardGame = ({ game, onOpenModal }) => {
         </div>
         <div>
           <Stars>★★★★★</Stars>
-          <ReviewLink onClick={(e)=>{ e.nativeEvent.stopImmediatePropagation(); e.stopPropagation();}}>Aquí reseña</ReviewLink>
+          <ReviewLink onClick={(e) => {e.stopPropagation(); onOpenReview(game); }}>Aquí reseña</ReviewLink>
         </div>
       </DetailsContainer>
     </CardContainer>
   );
 };
+
 
 export default CardGame;
