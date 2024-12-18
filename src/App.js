@@ -407,6 +407,17 @@ const App = () => {
     );
   };
 
+  const handleEditReview = (previousReview, editedReview) => {
+    setGames((prevGames) => (
+      prevGames.map( 
+        (gameInMap) => 
+          ({
+            ...gameInMap, 
+            reviews: gameInMap.reviews.map( (reviewInMap) => (reviewInMap===previousReview ? editedReview : reviewInMap) ) 
+          }) 
+      ) 
+    ));
+  }
 
   // Switch que maneja qué componente se mostrará en pantalla
   // recibe como parámetro el valor "view" que contiene una cadena de caracteres con palabras clave
@@ -453,7 +464,7 @@ const App = () => {
         <ReviewList
           games={games} 
           currentUser={loggedUser}
-          // handleEditReview={handleSaveEditedReview} //Aqui editar reseña
+          handleEditReview={handleEditReview} //Aqui editar reseña
           handleDeleteReview={handleDeleteReview}
         />
         </CardWrapper>

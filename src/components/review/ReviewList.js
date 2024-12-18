@@ -199,8 +199,11 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
   };
 
   const handleSaveEdit = () => {
+    console.log(editingReview);
     if (editingReview) {
-      handleEditReview({
+      handleEditReview(
+        editingReview,
+      {
         ...editingReview,
         rating: newRating,
         comment: newComment,
@@ -243,11 +246,6 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
         </Modal>
       )}
 
-      {isEditModalOpen && (
-        <Modal>
-
-        </Modal>
-      )}
 
 {isEditModalOpen && (
         <ModalContainer>
