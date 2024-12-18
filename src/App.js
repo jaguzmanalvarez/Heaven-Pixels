@@ -292,16 +292,19 @@ const App = () => {
     handleCloseReviewModal();
   };
   
-
-  // Manejador para editar una reseña
-  const handleEditReview = (review, gameId) => {
-    console.log('Editar reseña', review, gameId);
-  };
   
   // Manejador para eliminar una reseña
-  const handleDeleteReview = (review, gameId) => {
-    console.log('Eliminar reseña', review, gameId);
+  const handleDeleteReview = (reviewToDelete) => {
+    setGames((prevGames) =>
+      prevGames.map((game) => ({
+        ...game,
+        reviews: game.reviews.filter(
+          (review) => review !== reviewToDelete
+        ),
+      }))
+    );
   };
+
 
   // Switch que maneja qué componente se mostrará en pantalla
   // recibe como parámetro el valor "view" que contiene una cadena de caracteres con palabras clave
@@ -348,7 +351,7 @@ const App = () => {
         <ReviewList
           games={games} 
           currentUser={loggedUser}
-          handleEditReview={handleEditReview}
+          // handleEditReview={handleSaveEditedReview} //Aqui editar reseña
           handleDeleteReview={handleDeleteReview}
         />
         </CardWrapper>

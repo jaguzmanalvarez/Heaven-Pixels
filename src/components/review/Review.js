@@ -110,7 +110,7 @@ const Review = ({ game, onCloseModal, onSubmitReview }) => {
     <ModalContainer onClick={onCloseModal}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <Title>{game.title}</Title>
-        <p>Calificación *</p>
+        <p>Calificación</p>
         <StarsContainer>
           {[...Array(5)].map((_, index) => (
             <span
