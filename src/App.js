@@ -404,9 +404,9 @@ const App = () => {
 
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
         
-        <SearchBox type="text" placeholder="Buscar juego..." value={searchQuery} onChange={handleSearchChange}/>
-
+        
         <CardWrapper>
+          <SearchBox type="text" placeholder="Buscar juego..." value={searchQuery} onChange={handleSearchChange}/>
           <GameList games={filteredGames} handleOpenModal={handleOpenModal} onOpenReview={handleOpenReview}/>
         </CardWrapper>
       </div>
