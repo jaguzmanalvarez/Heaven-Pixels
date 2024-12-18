@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { BlueButton, RedButton } from "./ReviewList";
 
 // Estilos del contenedor principal del modal
 const ModalContainer = styled.div`
@@ -132,8 +133,8 @@ const Review = ({ game, onCloseModal, onSubmitReview }) => {
           />
         </div>
         <ButtonsContainer>
-          <Button onClick={onCloseModal}>Cancelar</Button>
-          <Button onClick={handleSubmit}>Agregar reseña</Button>
+          <RedButton onClick={onCloseModal}>Cancelar</RedButton>
+          <BlueButton onClick={handleSubmit}>Agregar reseña</BlueButton>
         </ButtonsContainer>
       </ModalContent>
     </ModalContainer>

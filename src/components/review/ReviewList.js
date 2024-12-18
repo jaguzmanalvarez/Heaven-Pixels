@@ -47,7 +47,7 @@ const StarContainer = styled.div`
   }
 `;
 
-const RedButton = styled.button`
+export const RedButton = styled.button`
   background: linear-gradient(135deg,rgb(253, 97, 97),rgb(251, 56, 56));
   color: white;
   border: none;
@@ -70,7 +70,7 @@ const RedButton = styled.button`
   }
 `;
 
-const BlueButton = styled.button`
+export const BlueButton = styled.button`
   background: linear-gradient(135deg, #5c6fff, #788bff);
   color: white;
   border: none;
