@@ -18,6 +18,76 @@ export const Container = styled.div`
     box-sizing: border-box;
 `;
 
+export const SuccessMessage = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeInOut 5s forwards;
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+  }
+`;
+
+export const FailMessage = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color:rgb(167, 40, 40);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeInOut 4s forwards;
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+  }
+`;
+
 export const SubContainer = styled.div`
     padding: 200px 1px;
     width: 340px;
@@ -52,7 +122,7 @@ export const AuthInputGroup = styled.div`
 
 export const AuthInputGroupReg = styled.div`
   width: 100%;
-  padding: 70px 15px;
+  padding: 60px 15px;
   display: block;
   justify-content: space-between;
 `;
@@ -80,6 +150,35 @@ export const WhiteButton = styled.button`
         border-color: rgb(123, 123, 123);
         color:#3a45b2;
         transform: scale(0.99);
+    }
+`;
+
+export const BackButton = styled.button`
+display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio entre el ícono y el texto */
+    background: #3a45b2;
+    color: white; 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    svg {
+    width: 16px;
+    height: 16px;
+    fill: #fff; /* Color del ícono */
+    }
+
+    &:hover {
+    background: #5c6fff;
+    }
+
+    &:active {
+    background: #3a45b2;
     }
 `;
 

@@ -1,3 +1,6 @@
+
+// Componente llamado desde el archivo src/App.js
+
 import React from "react";
 import styled from "styled-components";
 
@@ -76,9 +79,7 @@ const Label = styled.p`
   font-weight: bold;
 `;
 
-
-
-const GameModalPage = ({game, onCloseModal}) => {
+const GameModalPage = ({game, onCloseModal, isAdmin, onEditGame, onDeleteGame}) => {
 
     return (
         <ModalContainer onClick={onCloseModal}>
@@ -105,6 +106,12 @@ const GameModalPage = ({game, onCloseModal}) => {
                         {game.desc}
                     </Description>
                 </div>
+                {isAdmin &&(
+                        <div>
+                            <button onClick={onEditGame}>Editar</button>
+                            <button onClick={onDeleteGame}>Eliminar</button>
+                        </div>
+                    )}
                 <hr />
                 <div>
                     Aquí debería ir la sección de reseñas
