@@ -12,8 +12,8 @@ import EditGamePage from './components/game/EditGamePage';
 import ConfirmModal from './components/ConfirmModal';
 
 const CardWrapper = styled.div`
-  margin-top: 20px; /* Espacio entre el Navbar y la tarjeta */
-`;
+  margin-top: 50px; /* Espacio entre el Navbar y la tarjeta */
+  `;
 
 const App = () => {
   // Arreglo que contiene los juegos registrados
@@ -89,6 +89,42 @@ const App = () => {
       descCard:"Acompaña a los Helldivers a luchar por la libertad en una galaxia hostil.",
       cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202309/0718/2c253de3117182b4a09d02ad16ebc51a25d4ea9208a5d057.jpg",
       formImg: "https://sm.ign.com/ign_latam/news/h/helldivers/helldivers-2-developer-insists-sony-acquisition-rumor-is-fak_arqg.jpg"
+    },
+    {
+      id: 6,
+      title: "Hi-Fi Rush",
+      date: "25/01/2023",
+      dev: "Tango Gameworks",
+      publisher: "Bethesda Softworks",
+      platforms: ["Xbox series", "Windows"],
+      desc:"Chai contra el mundo! Juega como el aspirante a estrella de rock Chai, considerado mutante después de que un músico se fusiona accidentalmente a su corazón. Aprovecha la capacidad de Chai de sentir el ritmo a su alrededor y lucha contra los jefes corporativos decididos a 'retirarlo'.",
+      descCard:"Lucha contra robots enemigos con ritmos feroces en este emocionante juego de acción.",
+      cardImg: "https://images.mweb.bethesda.net/_images/images.ctfassets.net/tehqz6o3okv8/2eZHOuPHrSCuP5Y4VpmcZA/247c20de2544c3cfe9e78d98c1aa2524/HFR-box-standard.webp?f=jpg&h=1000&w=779&s=jnbkJw0fra-wn-ZNG3nW3eMAnjAxyeVS7e-aQz8HrLE",
+      formImg: "https://multiplayer.net-cdn.it/thumbs/images/2024/05/08/hi-fi-rush-2_jpg_1376x774_crop_q85.jpg"
+    },
+    {
+      id: 7,
+      title: "Marvel's Spider-Man 2",
+      date: "20/10/2023",
+      dev: "Insomniac Games",
+      publisher: "Sony Interactive Entertainment",
+      platforms: ["PlayStation 5", "Windows"],
+      desc:"Balancéate, salta y utiliza las nuevas alas de telaraña para recorrer toda la ciudad de Nueva York de Marvel. También podrás cambiar rápidamente entre Peter Parker y Miles Morales para vivir diferentes historias y canalizar poderes nuevos y épicos, mientras el emblemático villano Venom amenaza con destruir sus vidas, la ciudad y a todos sus seres queridos.",
+      descCard:"Los Spider-Men Peter Parker y Miles Morales regresan para una nueva y emocionante aventura.",
+      cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
+      formImg: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/97e9f5fa6e50c185d249956c6f198a2652a9217e69a59ecd.jpg"
+    },
+    {
+      id: 8,
+      title: "Super Mario Bros. Wonder",
+      date: "20/10/2024",
+      dev: "Nintendo EPD Production Group No. 10",
+      publisher: "Nintendo",
+      platforms: ["Nintendo Switch"],
+      desc:"¡El estilo de juego clásico de los juegos de Mario será toda una locura con la adición de la Flor Maravilla en el juego Super Mario Bros. Wonder! Estos revolucionarios objetos activarán espectaculares momentos que tendrás que ver para creer. ¡Mira cómo las tuberías cobran vida, siembra el caos como una inmensa bola con picos y mucho más!",
+      descCard:"El estilo de juego clásico de desplazamiento lateral de los juegos de Mario será toda una locura con la adición de la Flor Maravilla.",
+      cardImg: "https://i.ebayimg.com/images/g/CxYAAOSwNwVlMlwF/s-l400.jpg",
+      formImg: "https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/dde58e70727aad7c96e348ce79b3ca2b.jpg"
     },
   ]);
 
