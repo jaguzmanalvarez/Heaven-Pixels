@@ -25,6 +25,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
     );
 
     // Manejador de errores en el rellenado del form
+    const [newPlatform, setNewPlatform] = useState(""); // Input para la nueva plataforma
     const [failed, setFailed] = useState(false);
     const [failMessage, setFailMessage] = useState("");
 
@@ -56,6 +57,23 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
             ...newGame,
             [name]: value
         });
+    };
+
+    const handleAddPlatform = () => {
+        if (newPlatform.trim()) {
+            setNewGame((prev) => ({
+                ...prev,
+                platforms: [...prev.platforms, newPlatform.trim()]
+            }));
+            setNewPlatform(""); // Limpia el input después de añadir
+        }
+    };
+
+    const handleRemovePlatform = (index) => {
+        setNewGame((prev) => ({
+            ...prev,
+            platforms: prev.platforms.filter((_, i) => i !== index)
+        }));
     };
 
     const handleSubmit = (e) => {
@@ -202,6 +220,64 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                         onChange={handleChange} 
                         ref={cardImgRef}
                     ></GameInput>
+                    <GameLabel>Plataformas:</GameLabel>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <GameInput
+                            value={newPlatform}
+                            type="text"
+                            placeholder="Añadir plataforma"
+                            onChange={(e) => setNewPlatform(e.target.value)}
+                        />
+                        <button
+                            type="button"
+                            onClick={handleAddPlatform}
+                            style={{
+                                marginLeft: "10px",
+                                padding: "5px 10px",
+                                backgroundColor: "#007BFF",
+                                color: "#fff",
+                                border: "none",
+                                borderRadius: "5px",
+                                cursor: "pointer"
+                            }}
+                        >
+                            Añadir
+                        </button>
+                    </div>
+                    {/* Cambié el estilo aquí para que las plataformas se alineen en fila */}
+                    <div style={{ display: "flex", flexWrap: "wrap", marginTop: "10px" }}>
+                        {newGame.platforms.map((platform, index) => (
+                            <div
+                                key={index}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    marginRight: "10px", // Espacio entre los elementos
+                                    backgroundColor: "#f0f0f0",
+                                    padding: "5px 10px",
+                                    borderRadius: "20px",
+                                    marginBottom: "5px"
+                                }}
+                            >
+                                {platform}
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemovePlatform(index)}
+                                    style={{
+                                        marginLeft: "10px",
+                                        padding: "2px 5px",
+                                        backgroundColor: "red",
+                                        color: "#fff",
+                                        border: "none",
+                                        borderRadius: "3px",
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    X
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 </GameInputGroup>
                 <SaveGameButton onClick={()=>{setFailed(false);}}>Guardar</SaveGameButton>
             </form>
