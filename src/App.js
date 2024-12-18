@@ -16,6 +16,30 @@ const CardWrapper = styled.div`
   margin-top: 20px; /* Espacio entre el Navbar y la tarjeta */
 `;
 
+const SearchBox = styled.input`
+  margin-top: 20px; /* Espacio superior */
+  margin-right: 20px; /* Espacio derecho */
+  width: 200px; /* Tamaño más pequeño */
+  padding: 6px 10px; /* Espacio interno reducido */
+  font-size: 14px; /* Fuente más pequeña */
+  color: #333; /* Color de texto oscuro */
+  background-color: transparent; /* Fondo transparente */
+  border: 1px solid #aaa; /* Borde delgado gris */
+  border-radius: 15px; /* Bordes redondeados */
+  outline: none;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #aaa; /* Color de texto del placeholder */
+    font-style: italic;
+  }
+
+  &:focus {
+    border-color: #5a6ee1; /* Color al enfocar */
+    box-shadow: 0px 2px 4px rgba(90, 110, 225, 0.3); /* Sombra sutil */
+  }
+`;
+
 const App = () => {
   // Arreglo que contiene los juegos registrados
   const [games, setGames] = useState([
@@ -190,6 +214,17 @@ const App = () => {
     }
   }
 
+  const [searchQuery, setSearchQuery] = useState('');
+
+
+  const filteredGames = games.filter((game) =>
+    game.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   // Manejadores de la ventana modal para mostrar la información del juego
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -333,8 +368,10 @@ const App = () => {
 
         <NavBar key={isAuth?loggedUser.id:101} user={isAuth?loggedUser:null} isAuth={isAuth} onSwitchView={switchView} onLogOut={handleLogOut}/>
         
+        <SearchBox type="text" placeholder="Buscar juego..." value={searchQuery} onChange={handleSearchChange}/>
+
         <CardWrapper>
-          <GameList games={games} handleOpenModal={handleOpenModal} onOpenReview={handleOpenReview}/>
+          <GameList games={filteredGames} handleOpenModal={handleOpenModal} onOpenReview={handleOpenReview}/>
         </CardWrapper>
       </div>
     );
