@@ -189,6 +189,10 @@ export const ModalContent = styled.div`
   width: 300px;
 `;
 
+export const NavMargin = styled.div`
+  margin-top: 70px; /* Espacio entre el Navbar y la tarjeta */
+  `;
+
 export const ModalActions = styled.div`
   display: flex;
   justify-content: space-around;
