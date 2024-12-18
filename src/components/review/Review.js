@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+// Estilos del contenedor principal del modal
 const ModalContainer = styled.div`
   position: fixed;
   left: 0;
@@ -14,6 +15,7 @@ const ModalContainer = styled.div`
   z-index: 1000;
 `;
 
+// Contenedor del contenido del modal
 const ModalContent = styled.div`
   background-color: white;
   border-radius: 8px;
@@ -24,12 +26,14 @@ const ModalContent = styled.div`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 `;
 
+// Estilos del título
 const Title = styled.h2`
   font-size: 1.5rem;
   color: #333;
   margin-bottom: 15px;
 `;
 
+// Contenedor de estrellas
 const StarsContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -43,6 +47,7 @@ const StarsContainer = styled.div`
   }
 `;
 
+// Comentario
 const TextArea = styled.textarea`
   width: 100%;
   height: 100px;
@@ -54,12 +59,14 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
+// Contenedor de botones
 const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 `;
 
+// Botones
 const Button = styled.button`
   padding: 10px 15px;
   font-size: 1rem;
@@ -80,34 +87,30 @@ const Button = styled.button`
 `;
 
 const Review = ({ game, onCloseModal, onSubmitReview }) => {
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(0); 
+  const [comment, setComment] = useState(""); 
 
+  // Manejador para manejar la selección de estrellas
   const handleStarClick = (index) => {
     setRating(index + 1);
   };
 
+  // Manejador para enviar la reseña
   const handleSubmit = () => {
-    if (rating === 0 || comment.trim() === "") {
-      alert("Por favor, ingrese una calificación y un comentario.");
-      return;
-    }
-
     const reviewData = {
       gameTitle: game.title,
       rating,
       comment,
     };
-
-    onSubmitReview(reviewData);
-    onCloseModal();
+    onSubmitReview(reviewData); 
+    onCloseModal(); 
   };
 
   return (
     <ModalContainer onClick={onCloseModal}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <Title>{game.title}</Title>
-        <p>Calificación *</p>
+        <p>Calificación</p>
         <StarsContainer>
           {[...Array(5)].map((_, index) => (
             <span

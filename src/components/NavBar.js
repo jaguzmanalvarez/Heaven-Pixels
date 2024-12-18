@@ -9,6 +9,10 @@ const NavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;  /* Fija el navbar */
+  top: 0;  /* Lo posiciona en la parte superior de la página */
+  width: 98%;  /* Ocupa todo el ancho */
+  z-index: 1000;  /* Se asegura de que esté encima de otros elementos */
 `;
 // Agrupacion de elementos
 const NavGroup = styled.div`

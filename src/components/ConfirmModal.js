@@ -16,7 +16,7 @@ const ModalContainer = styled.div`
 const Modal = styled.div`
     background-color: white;
     width: 25%;
-    height: 25%;
+    display: inline-block;
     padding: 20px;
     border-radius: 10px;
 `;
@@ -50,7 +50,30 @@ const AcceptButton = styled(Button)`
     }
 `;
 
-const ConfirmModal = ({title, text, onSetValue, onCloseModal}) => {
+const DeleteButton = styled.button`
+  background: linear-gradient(135deg,rgb(148, 7, 7),rgb(175, 6, 6)); /* Rojo oscuro para eliminar cuenta */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: linear-gradient(135deg,rgb(171, 8, 8),rgb(187, 7, 7)); /* Rojo aún más oscuro para el hover */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+const ConfirmModal = ({title, text, onSetValue, onCloseModal, isDelete=false}) => {
 
     const handleOption = (value) =>{
         onSetValue(value);
@@ -63,7 +86,10 @@ const ConfirmModal = ({title, text, onSetValue, onCloseModal}) => {
                 <h1>{title}</h1>
                 <p>{text}</p>
                 <div>
-                    <AcceptButton onClick={()=>{handleOption(true);}}>Aceptar</AcceptButton>
+                    {isDelete ?  
+                        (<DeleteButton onClick={()=>{handleOption(true);}}>Eliminar</DeleteButton>)
+                    : 
+                        (<AcceptButton onClick={()=>{handleOption(true);}}>Aceptar</AcceptButton>)}
                     <CancelButton onClick={()=>{handleOption(false);}}>Cancelar</CancelButton>
                 </div>
                     
