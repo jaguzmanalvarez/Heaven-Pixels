@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CancelButton, FadeInGame, FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
+import { FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton } from "../../styles/game/GameStyles";
 import { BackButton } from "../../styles/auth/AuthStyles";
 import styled from 'styled-components';
 
@@ -34,7 +34,6 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
     const dateRef = useRef(null);
     const devRef = useRef(null);
     const publisherRef = useRef(null);
-    const platformsRef = useRef(null);
     const descRef = useRef(null);
     const descCardRef = useRef(null);
     const cardImgRef = useRef(null);

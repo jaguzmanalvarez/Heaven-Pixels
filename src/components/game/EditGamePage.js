@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FadeInGame, FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
+import { FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton } from "../../styles/game/GameStyles";
 import ConfirmModal from "../ConfirmModal";
 import { BackButton } from "../../styles/auth/AuthStyles";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ const CardWrapper = styled.div`
   margin-top: 70px; /* Espacio entre el Navbar y la tarjeta */
   `;
 
-const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
+const EditGamePage = ({game, handleEdit, onCloseEditPage}) => {
 
     const [editedGame, setEditedGame] = useState(
         {
@@ -49,7 +49,6 @@ const EditGamePage = ({game ,onSwitchView, handleEdit, onCloseEditPage}) => {
     const dateRef = useRef(null);
     const devRef = useRef(null);
     const publisherRef = useRef(null);
-    const platformsRef = useRef(null);
     const descRef = useRef(null);
     const descCardRef = useRef(null);
     const cardImgRef = useRef(null);

@@ -37,6 +37,7 @@ const RegisterPage = ({ onSwitchView, addUser }) => {
       const newUser = {
         id: Date.now(), // Usando el timestamp como id único
         userName: typedUser.userName,
+        email: typedUser.email, // Asegurarte de incluir el email
         password: typedUser.password,
         isAdmin: false, // Por defecto no es administrador
         pic: typedUser.pic || "https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg", // Puedes dejarlo vacío o asignar una imagen por defecto

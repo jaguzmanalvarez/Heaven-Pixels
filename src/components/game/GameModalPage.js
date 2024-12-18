@@ -3,7 +3,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { DeleteGameButton, EditGameButton, GameImage } from "../../styles/game/GameStyles";
+import { DeleteGameButton, EditGameButton } from "../../styles/game/GameStyles";
 
 const ModalContainer = styled.div`
     position: fixed;
