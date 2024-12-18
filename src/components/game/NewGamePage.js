@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CancelButton, FadeInGame, FailGameMessage, GameFormContainer, GameInput, GameInputGroup, GameLabel, GameTextArea, SaveGameButton, WarningLabel } from "../../styles/game/GameStyles";
 import { BackButton } from "../../styles/auth/AuthStyles";
+import styled from 'styled-components';
+
+const CardWrapper = styled.div`
+  margin-top: 70px; /* Espacio entre el Navbar y la tarjeta */
+  `;
 
 const NewGamePage = ({onSwitchView, handleCreate}) => {
 
@@ -109,6 +114,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
     }
 
     return(
+        <CardWrapper>
         <GameFormContainer>
             <BackButton onClick={() => onSwitchView("main")}>
                 <svg
@@ -200,6 +206,7 @@ const NewGamePage = ({onSwitchView, handleCreate}) => {
                 <SaveGameButton onClick={()=>{setFailed(false);}}>Guardar</SaveGameButton>
             </form>
         </GameFormContainer>
+        </CardWrapper>
     );
 }
 

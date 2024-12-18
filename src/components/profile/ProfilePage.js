@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Container,Header,ProfileSection,ProfileImage,UserInfo,UserName,InfoSection,InfoList,EditButton, LogOutButton,DeleteUserButton, Modal, ModalContent, ModalActions} from "../../styles/profile/ProfilePageStyles";
+import {Container,Header,ProfileSection,ProfileImage,UserInfo,UserName,InfoSection,InfoList,EditButton, LogOutButton,DeleteUserButton, Modal, ModalContent, ModalActions, NavMargin} from "../../styles/profile/ProfilePageStyles";
 import EditProfilePage from "./EditProfilePage";
 
 const ProfilePage = ({ loggedUser, onUpdateUser, onSwitchView, onLogOut, onDeleteAccount }) => {
@@ -38,6 +38,7 @@ const ProfilePage = ({ loggedUser, onUpdateUser, onSwitchView, onLogOut, onDelet
   };
 
   return (
+    <NavMargin>
     <Container>
       <Header>Mi Perfil</Header>
 
@@ -93,6 +94,7 @@ const ProfilePage = ({ loggedUser, onUpdateUser, onSwitchView, onLogOut, onDelet
       )}
 
     </Container>
+    </NavMargin>
   );
 };
 

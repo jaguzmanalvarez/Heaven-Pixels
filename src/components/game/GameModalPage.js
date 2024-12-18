@@ -80,6 +80,28 @@ const Label = styled.p`
   font-weight: bold;
 `;
 
+const FloatingCloseButton = styled.button`
+  position: absolute;
+  top: 30px;
+  left: 60px;
+  margin: 50px 0px;
+  padding: 5px 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  z-index: 100; /* Para asegurarse de que esté encima de otros elementos */
+  
+  &:hover {
+    background-color:rgb(212, 212, 212);
+  }
+`;
+
 const GameModalPage = ({game, onCloseModal, isAdmin, onEditGame, onDeleteGame}) => {
 
     return (
@@ -118,7 +140,7 @@ const GameModalPage = ({game, onCloseModal, isAdmin, onEditGame, onDeleteGame}) 
                     Aquí debería ir la sección de reseñas
                 </div>
                 <div>
-                    <button onClick={onCloseModal}>Cerrar</button>
+                    <FloatingCloseButton onClick={onCloseModal}>X</FloatingCloseButton>
                 </div>
             </Modal>
         </ModalContainer>
