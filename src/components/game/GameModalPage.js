@@ -102,6 +102,61 @@ const FloatingCloseButton = styled.button`
   }
 `;
 
+// Contenedor de reseña
+const ReviewContainer = styled.div`
+    display: flex;
+    align-items: flex-start;
+    gap: 15px; 
+    margin: 15px 0;
+    font-family: Arial, sans-serif;
+    margin-left: 20px;
+`;
+
+const ProfilePlaceholder = styled.div`
+    width: 50px;
+    height: 50px;
+    background-color: #ccc;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-image: ${({ image }) => (image ? `url(${image})` : 'none')};
+    background-size: cover;
+    background-position: center;
+`;
+
+
+const ReviewContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
+
+const UserName = styled.p`
+    font-weight: bold;
+    margin: 0;
+    color: #000;
+    margin-bottom: 5px;
+`;
+
+
+const Comment = styled.p`
+    margin: 5px 0;
+    color: #333;
+`;
+
+const Stars = styled.div`
+    display: flex;
+
+    span {
+        font-size: 18px;
+        color: #999;
+        margin-right: 3px;
+
+        &.filled {
+            color: #000; /* Color de estrella llena */
+        }
+    }
+`;
+
 const GameModalPage = ({game, onCloseModal, isAdmin, onEditGame, onDeleteGame}) => {
 
     return (
@@ -137,7 +192,35 @@ const GameModalPage = ({game, onCloseModal, isAdmin, onEditGame, onDeleteGame}) 
                     )}
                 <hr />
                 <div>
-                    Aquí debería ir la sección de reseñas
+                <h2>Reseñas:</h2>
+                    {game.reviews.length === 0 ? (
+                        <p>No hay reseñas aún.</p>
+                    ) : (
+                        game.reviews.map((review, index) => {
+                            const renderStars = () => {
+                                const stars = [];
+                                for (let i = 1; i <= 5; i++) {
+                                    stars.push(
+                                        <span key={i} className={i <= review.rating ? "filled" : ""}>
+                                            ★
+                                        </span>
+                                    );
+                                }
+                                return stars;
+                            };
+
+                        return (
+                        <ReviewContainer key={index}>
+                            <ProfilePlaceholder image={review.userImage} />
+                             <ReviewContent>
+                                 <UserName>{review.author}</UserName>
+                                 <Stars>{renderStars()}</Stars>
+                                 <Comment>{review.comment}</Comment>
+                             </ReviewContent>
+                         </ReviewContainer>
+                        );
+                        })
+                    )}
                 </div>
                 <div>
                     <FloatingCloseButton onClick={onCloseModal}>X</FloatingCloseButton>
