@@ -37,27 +37,59 @@ const ReviewText = styled.p`
 `;
 
 const StarContainer = styled.div`
-  margin: 10px 0;
-  color: #f4c150;
-  font-size: 40px;
+  span {
+      margin: 10px 0;
+      font-size: 40px;
+      color: #999;
+      &.filled {
+        color: #f4c150; /* Color de estrella llena */
+      }
+  }
 `;
 
-const ButtonContainer = styled.div`
-  margin-top: 10px;
-`;
-
-const Button = styled.button`
-  background-color: #6200ea;
+const RedButton = styled.button`
+  background: linear-gradient(135deg,rgb(253, 97, 97),rgb(251, 56, 56));
   color: white;
   border: none;
-  padding: 5px 15px;
-  border-radius: 5px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 550;
   cursor: pointer;
-  margin-right: 10px;
-  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background-color: #3700b3;
+    background: linear-gradient(135deg,rgb(248, 30, 30),rgb(251, 97, 97));
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+const BlueButton = styled.button`
+  background: linear-gradient(135deg, #5c6fff, #788bff);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 550;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: linear-gradient(135deg, #4956d4, #5c6fff);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;
 
@@ -78,14 +110,6 @@ const GamelistDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-`;
-
-const ReviewContainer = styled.div`
-  width: 50%;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 `;
 
 
@@ -109,9 +133,26 @@ const ModalContent = styled.div`
 `;
 
 const ModalActions = styled.div`
-  margin-top: 20px;
   display: flex;
   justify-content: space-around;
+  margin-top: 20px;
+  
+  button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    &:first-child {
+      background-color: #e60000;
+      color: white;
+    }
+
+    &:last-child {
+      background-color: #ddd;
+      color: white;
+    }
+  }
 `;
 
 const ModalContainer = styled.div`
@@ -155,12 +196,6 @@ const TextArea = styled.textarea`
   padding: 10px;
   font-size: 1rem;
   resize: none;
-`;
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
 `;
 
 const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }) => {
@@ -219,8 +254,11 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
   };
 
   const handleSaveEdit = () => {
+    console.log(editingReview);
     if (editingReview) {
-      handleEditReview({
+      handleEditReview(
+        editingReview,
+      {
         ...editingReview,
         rating: newRating,
         comment: newComment,
@@ -238,10 +276,10 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
               <GameTitle>{review.gameName}</GameTitle>
             <StarContainer>{renderStars(review.rating)}</StarContainer>
               <ReviewText>{review.comment}</ReviewText>
-            <ButtonContainer>
-              <Button onClick={() => handleEditClick(review)}>Editar</Button>
-              <Button onClick={() => handleDeleteClick(review)}>Eliminar</Button>
-            </ButtonContainer>
+              <ModalActions>
+                <BlueButton onClick={() => handleEditClick(review)}>Editar</BlueButton>
+                <RedButton onClick={() => handleDeleteClick(review)}>Eliminar</RedButton>
+            </ModalActions>
           </ReviewCard>
         ))}
       </GamelistDiv>
@@ -251,22 +289,13 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
           <ModalContent>
             <h2>¿Estás seguro que deseas eliminar esta reseña?</h2>
             <ModalActions>
-              <button onClick={handleConfirmDelete} style={{ backgroundColor: "#ddd", color: "#333" }}>
-                Aceptar
-              </button>
-              <button onClick={handleCancelDelete} style={{ backgroundColor: "#e60000", color: "white" }}>
-                Cancelar
-              </button>
+              <BlueButton onClick={handleConfirmDelete} >Aceptar</BlueButton>
+              <RedButton onClick={handleCancelDelete} >Cancelar</RedButton>
             </ModalActions>
           </ModalContent>
         </Modal>
       )}
 
-      {isEditModalOpen && (
-        <Modal>
-
-        </Modal>
-      )}
 
 {isEditModalOpen && (
         <ModalContainer>
@@ -293,10 +322,10 @@ const ReviewList = ({ games, currentUser, handleEditReview, handleDeleteReview }
                 onChange={(e) => setNewComment(e.target.value)}
               />
             </div>
-            <ButtonsContainer>
-              <Button onClick={() => setIsEditModalOpen(false)}>Cancelar</Button>
-              <Button onClick={handleSaveEdit}>Guardar Cambios</Button>
-            </ButtonsContainer>
+            <ModalActions>
+              <RedButton onClick={() => setIsEditModalOpen(false)}>Cancelar</RedButton>
+              <BlueButton onClick={handleSaveEdit}> Guardar Cambios</BlueButton>
+            </ModalActions>
           </ModalContent>
         </ModalContainer>
       )}

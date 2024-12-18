@@ -124,26 +124,26 @@ export const EditButton = styled.button`
 `;
 
 export const LogOutButton = styled.button`
-background: linear-gradient(135deg,rgb(253, 97, 97),rgb(251, 56, 56)); /* Rojo con tonos más intensos */
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 25px;
-font-size: 1rem;
-font-weight: 600;
-cursor: pointer;
-transition: all 0.3s ease;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg,rgb(253, 97, 97),rgb(251, 56, 56));
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-&:hover {
-  background: linear-gradient(135deg,rgb(248, 30, 30),rgb(251, 97, 97)); /* Rojo oscuro para el hover */
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-  transform: translateY(-3px);
-}
+  &:hover {
+    background: linear-gradient(135deg,rgb(248, 30, 30),rgb(251, 97, 97));
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+  }
 
-&:active {
-  transform: translateY(0);
-}
+  &:active {
+    transform: translateY(0);
+  }
 `;
 
 export const DeleteUserButton = styled.button`
