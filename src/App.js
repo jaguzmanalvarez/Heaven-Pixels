@@ -79,6 +79,18 @@ const App = () => {
       cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202405/2216/cbb03393f0ab1149f2b89a8194ce19e596a24fa5bec6526a.png",
       formImg: "https://cdn.atomix.vg/wp-content/uploads/2024/12/boll.jpg"
     },
+    {
+      id: 5,
+      title: "Helldivers 2",
+      date: "08/02/2024",
+      dev: "Arrowhead Game Studios",
+      publisher: "Sony Interactive Entertainment",
+      platforms: ["PlayStation 5", "Windows"],
+      desc:"Ponte las botas de Helldiver, un soldado de élite cuya misión es difundir la paz, la libertad y la Democracia Tutelada usando las herramientas más enormes y explosivas de toda la galaxia. Los Helldivers no empiezan una misión sin los refuerzos adecuados, pero de ti depende cómo y cuándo pedirlos. No solo cuentas con una variedad de armas principales superpoderosas y arsenales personalizables, sino que también puedes usar estratagemas durante las partidas. ",
+      descCard:"Acompaña a los Helldivers a luchar por la libertad en una galaxia hostil.",
+      cardImg: "https://image.api.playstation.com/vulcan/ap/rnd/202309/0718/2c253de3117182b4a09d02ad16ebc51a25d4ea9208a5d057.jpg",
+      formImg: "https://sm.ign.com/ign_latam/news/h/helldivers/helldivers-2-developer-insists-sony-acquisition-rumor-is-fak_arqg.jpg"
+    },
   ]);
 
   // Arreglo que contiene los usuarios registrados
