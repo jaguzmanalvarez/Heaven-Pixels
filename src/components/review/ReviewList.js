@@ -26,9 +26,14 @@ const ReviewText = styled.p`
 `;
 
 const StarContainer = styled.div`
-  margin: 10px 0;
-  color: #f4c150;
-  font-size: 40px;
+  span {
+      margin: 10px 0;
+      font-size: 40px;
+      color: #999;
+      &.filled {
+        color: #f4c150; /* Color de estrella llena */
+      }
+  }
 `;
 
 const ButtonContainer = styled.div`
